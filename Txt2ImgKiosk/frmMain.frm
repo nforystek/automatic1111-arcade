@@ -1,12 +1,11 @@
 VERSION 5.00
 Begin VB.Form frmMain 
-   AutoRedraw      =   -1  'True
-   BackColor       =   &H00FFFFFF&
+   BackColor       =   &H00000007&
    BorderStyle     =   1  'Fixed Single
-   ClientHeight    =   10095
+   ClientHeight    =   11175
    ClientLeft      =   -45
    ClientTop       =   -105
-   ClientWidth     =   20985
+   ClientWidth     =   20205
    ClipControls    =   0   'False
    ControlBox      =   0   'False
    BeginProperty Font 
@@ -24,8 +23,8 @@ Begin VB.Form frmMain
    MinButton       =   0   'False
    MousePointer    =   2  'Cross
    Moveable        =   0   'False
-   ScaleHeight     =   10095
-   ScaleWidth      =   20985
+   ScaleHeight     =   11175
+   ScaleWidth      =   20205
    StartUpPosition =   2  'CenterScreen
    Visible         =   0   'False
    WindowState     =   2  'Maximized
@@ -70,6 +69,7 @@ Begin VB.Form frmMain
       Appearance      =   0  'Flat
       BackColor       =   &H00FFFFFF&
       BorderStyle     =   0  'None
+      FillColor       =   &H00FFFFFF&
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   13.5
@@ -80,18 +80,18 @@ Begin VB.Form frmMain
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H80000008&
-      Height          =   4875
-      Left            =   5040
-      ScaleHeight     =   4875
-      ScaleWidth      =   4725
+      Height          =   6555
+      Left            =   4440
+      ScaleHeight     =   6555
+      ScaleWidth      =   11325
       TabIndex        =   13
-      Top             =   1440
+      Top             =   -360
       Visible         =   0   'False
-      Width           =   4725
+      Width           =   11325
       Begin VB.Image Image3 
          Height          =   6615
          Index           =   1
-         Left            =   2280
+         Left            =   6000
          Picture         =   "frmMain.frx":4120C
          Stretch         =   -1  'True
          Top             =   1560
@@ -100,10 +100,10 @@ Begin VB.Form frmMain
       Begin VB.Image Image3 
          Height          =   6615
          Index           =   0
-         Left            =   480
+         Left            =   960
          Picture         =   "frmMain.frx":52E46
          Stretch         =   -1  'True
-         Top             =   1920
+         Top             =   1800
          Width           =   27375
       End
       Begin VB.Image Image3 
@@ -388,10 +388,12 @@ Begin VB.Form frmMain
          Top             =   2640
          Width           =   10545
          Begin VB.CommandButton Command5 
+            BackColor       =   &H00FFFFFF&
             Caption         =   "View (F1)"
             Height          =   735
             Index           =   0
             Left            =   8400
+            Style           =   1  'Graphical
             TabIndex        =   17
             Top             =   120
             Width           =   1935
@@ -924,6 +926,21 @@ Private Sub SetAllFonts()
     End If
 End Sub
 
+Private Sub SetAllBackground()
+    Me.BackColor = GlobalBackColor
+    
+        Dim ctrl As Control
+        For Each ctrl In Me.Controls
+            Select Case TypeName(ctrl)
+                Case "Label", "CommandButton", "Frame", "TextBox", "PictureBox"
+                    ctrl.BackColor = Me.BackColor
+                Case "Image", "Timer"
+                Case Else
+            End Select
+        Next
+
+End Sub
+
 Private Sub Command5_Click(Index As Integer)
     ViewTopChats (Index + 1)
 End Sub
@@ -952,6 +969,8 @@ Private Sub Form_Initialize()
         Err.Clear
         End
     End If
+
+    
 End Sub
 
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
@@ -965,6 +984,7 @@ Private Sub Form_Load()
     Picture1.Tag = 0
     
     SetAllFonts
+    SetAllBackground
     
     LoadMusicFiles CoinDrop, "coindrop"
     LoadMusicFiles Generate, "generate"
@@ -1688,6 +1708,7 @@ Private Sub ViewWinner(Optional ByVal Place As Long = -1)
             SetVisible Image2(Image2.UBound), True
             SetVisible Label3(Label3.UBound), True
             SetVisible Command5(Command5.UBound), True
+            Command5(Command5.UBound).BackColor = GlobalBackColor
                 
             SetHeight Picture2, ((Image2(0).Top * 2) + Image2(0).Height)
             
@@ -1695,6 +1716,8 @@ Private Sub ViewWinner(Optional ByVal Place As Long = -1)
                 Load Image2(Image2.UBound + 1)
                 Load Label3(Label3.UBound + 1)
                 Load Command5(Command5.UBound + 1)
+                Command5(Command5.UBound).BackColor = Command5(Command5.UBound - 1).BackColor
+                
                 tmp = tmp - 1
                 SetHeight Picture2, Picture2.Height + (Image2(0).Top + Image2(0).Height)
                 SetTop Image2(Image2.UBound), (Image2(Image2.UBound - 1).Top + Image2(Image2.UBound - 1).Height) + Image2(0).Top
@@ -1798,7 +1821,6 @@ Private Sub Timer1_Timer()
             End If
         End If
 
-        DetermineVotingTerms
         
     End If
     
@@ -1811,7 +1833,13 @@ End Sub
 
 
 Private Sub DetermineVotingTerms()
-    If Not IsDate(VotingTerm) Then VotingTerm = Now 'if not set, start at no term
+    If Not IsDate(VotingTerm) Then
+    
+        VotingTerm = Now 'if not set, start at no term
+        
+        UpdateTermStatement (DateDiff("d", VotingTerm, Now) > 0)
+
+    End If
 
 
     Dim DD As Long
@@ -1819,51 +1847,52 @@ Private Sub DetermineVotingTerms()
     'the difference below or above 0
     'will determine no term or term
         
-    If Label5.Caption = "" Then UpdateTermStatement DD
-        
+    
     If Not (Year(VotingTerm) = Year(Now) And Day(VotingTerm) = Day(Now) And Month(VotingTerm) = Month(Now)) Then
     'avoid zero date difference
       
     
-        If (DD < 0) Then 'in no term
+        If (DD > 0) Then 'in no term
+        
+            UpdateTermStatement False
+        
+            If (DD > VotePeriod) Then  'if the term is up
+            
+                If (PeriodicVotes >= ResetVotes) Then
+
+                    'enough activity to switch to term based
+                    VotingTerm = DateAdd("d", VotePeriod, Now)
+                    dbQuery "UPDATE Files SET FileVote=0;"
+
+                    PeriodicVotes = 0 'reset vote counter
+                    SaveSettings
+
+                Else
+                    VotingTerm = Now
+                
+                End If
+
+            End If
+    
+        ElseIf (DD < 0) Then 'in term
+        
+            UpdateTermStatement True
         
             If (-DD > VotePeriod) Then 'if the term is up
                 'when the period to check usage passes
-            
-                If (PeriodicVotes >= ResetVotes) Then 'usage
-                    'enough activity to switch to term based
-                    VotingTerm = DateAdd("d", VotingTerm, Now)
+                
+                If (PeriodicVotes < ResetVotes) Then
+                    VotingTerm = DateAdd("d", VotePeriod, Now)
                     dbQuery "UPDATE Files SET FileVote=0;"
+                
+                    PeriodicVotes = 0 'reset vote counter
+                    SaveSettings
+
                 Else
-                    'stay no term, not much activity, reset date
-                    VotingTerm = DateAdd("d", -VotingTerm, Now)
+                    VotingTerm = DateAdd("d", VotePeriod, Now)
                 End If
 
-                UpdateTermStatement DD
-    
-                PeriodicVotes = 0 'reset vote counter
-                SaveSettings
-                
-            End If
-    
-        ElseIf (DD > 0) Then 'in term
-        
-            If (DD > VotePeriod) Then 'if the term is up
-                'when the period to check usage passes
-            
-                If PeriodicVotes < ResetVotes Then 'usage
-                    'not much activity, switch to no term
-                    VotingTerm = DateAdd("d", -VotingTerm, Now)
-                Else
-                    'stay term, not much activity, reset date
-                    VotingTerm = DateAdd("d", VotingTerm, Now)
-                    dbQuery "UPDATE Files SET FileVote=0;"
-                End If
-                UpdateTermStatement DD
-        
-                PeriodicVotes = 0 'reset vote counter
-                SaveSettings
-                
+
             End If
         
         End If
@@ -1872,12 +1901,23 @@ Private Sub DetermineVotingTerms()
     
 End Sub
 
-Private Sub UpdateTermStatement(ByVal DD As Long)
-    If DD <= 0 Then
-        SetCaption Label5, "The current pole election has no time period."
-    ElseIf DD > 0 Then
-        SetCaption Label5, "The current pole election term ends on " & VotingTerm
+Private Sub UpdateTermStatement(ByVal InTerm As Boolean)
+    If Not InTerm Then
+        If Label5.Caption <> "The current pole election has no time period." Then
+            
+            
+            SetCaption Label5, "The current pole election has no time period."
+            Debug.Print Label5.Caption
+        End If
+    Else
+        If Label5.Caption <> "The current pole election term ends on " & VotingTerm Then
+
+            SetCaption Label5, "The current pole election term ends on " & VotingTerm
+            Debug.Print Label5.Caption
+        End If
     End If
+    
+    
 End Sub
 
 'important timer
@@ -1896,4 +1936,7 @@ Private Sub Timer2_Timer()
             coinop = False
         End If
     #End If
+    
+
+    DetermineVotingTerms
 End Sub

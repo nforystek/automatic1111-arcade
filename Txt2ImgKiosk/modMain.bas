@@ -49,8 +49,10 @@ Option Explicit
 '
 '##########################################################
 
-Public Const VotePeriod = 5 '28 'this is what a election period will be in days before votes reset, if in period vote mode
-Public Const ResetVotes = 5 '14 'during the period, if this many votes are not met, it will not reset votes on the period
+Public Const GlobalBackColor = &HC0C0C0
+
+Public Const VotePeriod = 1 '28 'this is what a election period will be in days before votes reset, if in period vote mode
+Public Const ResetVotes = 2 '14 'during the period, if this many votes are not met, it will not reset votes on the period
                             'and possibly change the terms of the election to be no term, or having a term of VotePeriod
 
 Public Const TopNumberOf = 3 '12  'what number to make the top 10 so to speak, or top 5, anything from 1 to 12
@@ -234,6 +236,7 @@ Public Sub Main()
             
         InitCheck
         
+       
         Randomize
 
         'ensure we have a database or create the default from resource

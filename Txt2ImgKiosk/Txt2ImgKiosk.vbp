@@ -28,6 +28,7 @@ Startup="Sub Main"
 HelpFile=""
 Title="Txt2ImgKiosk"
 ExeName32="Txt2ImgKiosk.exe"
+Path32="..\..\..\stable-diffusion"
 Command32=""
 Name="Txt2ImgKiosk"
 HelpContextID="0"
@@ -42,7 +43,7 @@ VersionComments="neotext.org"
 VersionCompanyName="Neotext Software"
 VersionLegalCopyright="Copyright 2005 by Neotext Software"
 VersionProductName="Txt2ImgKiosk v2.1"
-CondComp="Txt2ImgKiosk = -1 : VBIDE = 0 : SAFEMODE = 0 : USESD = -1 : USECOIN = -1 : USEESC = 0 : modDatabase = -1 : modSettings = -1 : modFiles = -1 : modGuid = -1 : modCommon = -1 : modGraphics = -1 : modMain = -1 : modProcess = -1 : modFolders = -1 : modKillVisible = -1 : modKioskApp = -1 : modReg64Bit = -1 : modPeekPoke = -1 : modBitValue = -1"
+CondComp="Txt2ImgKiosk = -1 : VBIDE = -1 : SAFEMODE = -1 : USESD = 0 : USECOIN = 0 : USEESC = -1 : modDatabase = -1 : modSettings = -1 : modFiles = -1 : modGuid = -1 : modCommon = -1 : modGraphics = -1 : modMain = -1 : modProcess = -1 : modFolders = -1 : modKillVisible = -1 : modKioskApp = -1 : modReg64Bit = -1 : modPeekPoke = -1 : modBitValue = -1"
 CompilationType=0
 OptimizationType=0
 FavorPentiumPro(tm)=0
