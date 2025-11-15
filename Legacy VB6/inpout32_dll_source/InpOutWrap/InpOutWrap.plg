@@ -1,0 +1,37 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: InpOutWrap - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP170.tmp" with contents
+[
+/nologo /Gz /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "INPOUTWRAP_EXPORTS" /Fp"Release/InpOutWrap.pch" /YX /Fo"Release/" /Fd"Release/" /FD /c 
+"C:\Development\VisualC\InpOutWrap\InpOutWrap.cpp"
+"C:\Development\VisualC\InpOutWrap\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP170.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP171.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /incremental:no /pdb:"Release/InpOutWrap.pdb" /machine:I386 /def:".\InpOutWrap.def" /out:"Release/InpOutWrap.dll" /implib:"Release/InpOutWrap.lib" 
+.\Release\InpOutWrap.obj
+.\Release\StdAfx.obj
+]
+Creating command line "link.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP171.tmp"
+<h3>Output Window</h3>
+Compiling...
+InpOutWrap.cpp
+StdAfx.cpp
+C:\Development\VisualC\InpOutWrap\InpOutWrap.cpp(49) : warning C4715: 'Inp' : not all control paths return a value
+Linking...
+   Creating library Release/InpOutWrap.lib and object Release/InpOutWrap.exp
+
+
+
+<h3>Results</h3>
+InpOutWrap.dll - 0 error(s), 1 warning(s)
+</pre>
+</body>
+</html>

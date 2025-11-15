@@ -1,0 +1,68 @@
+Type=Exe
+Reference=*\G{2A75196C-D9EB-4129-B803-931327F72D5C}#2.8#0#..\..\..\Program Files (x86)\Common Files\System\ado\msado28.tlb#Microsoft ActiveX Data Objects 2.8 Library
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#..\..\..\Windows\SysWOW64\stdole2.tlb#OLE Automation
+Reference=*\G{983145C1-C8DC-11D3-9DE4-40000A4A1541}#1.0#0#..\..\..\stable-diffusion\redirect.dll#Redirect 1.0 Type Library
+Form=frmMain.frm
+Module=modMain; modMain.bas
+Module=modDatabase; modDatabase.bas
+Module=modSettings; modSettings.bas
+Class=Setting; Setting.cls
+Module=modDBFiles; modDBFiles.bas
+Module=modGuid; modGUID.bas
+Module=modCommon; modCommon.bas
+Module=modGraphics; modGraphics.bas
+Module=modProcess; modProcess.bas
+Class=UUCode; UUCode.cls
+Class=Stream; Stream.cls
+Module=modFolders; modFolders.bas
+Module=modKioskApp; modKioskApp.bas
+Module=modReg64Bit; modReg64Bit.bas
+Module=modPeekPoke; modPeekPoke.bas
+Module=modBitValue; modBitValue.bas
+Module=modWindow; modWindow.bas
+Module=modWndProc; modWndProc.bas
+Class=Player; Player.cls
+ResFile32="Txt2ImgKiosk.RES"
+IconForm="frmMain"
+Startup="Sub Main"
+HelpFile=""
+Title="Txt2ImgKiosk"
+ExeName32="Txt2ImgKiosk.exe"
+Command32=""
+Name="Txt2ImgKiosk"
+HelpContextID="0"
+Description="Stable-Diffusion"
+CompatibleMode="0"
+MajorVer=2
+MinorVer=1
+RevisionVer=0
+AutoIncrementVer=0
+ServerSupportFiles=0
+VersionComments="neotext.org"
+VersionCompanyName="Neotext Software"
+VersionLegalCopyright="Copyright 2005 by Neotext Software"
+VersionProductName="Txt2ImgKiosk v2.1"
+CondComp="Txt2ImgKiosk = -1 : VBIDE = 0 : SAFEMODE = -1 : USESD = -1 : USECOIN = 0 : USEESC = -1 : modDatabase = -1 : modSettings = -1 : modFiles = -1 : modGuid = -1 : modCommon = -1 : modGraphics = -1 : modMain = -1 : modProcess = -1 : modFolders = -1 : modKillVisible = -1 : modKioskApp = -1 : modReg64Bit = -1 : modPeekPoke = -1 : modBitValue = -1"
+CompilationType=0
+OptimizationType=0
+FavorPentiumPro(tm)=0
+CodeViewDebugInfo=0
+NoAliasing=0
+BoundsCheck=0
+OverflowCheck=0
+FlPointCheck=0
+FDIVCheck=0
+UnroundedFP=0
+StartMode=0
+Unattended=0
+Retained=0
+ThreadPerObject=0
+MaxNumberOfThreads=1
+DebugStartupOption=0
+
+[MS Transaction Server]
+AutoRefresh=1
+CondComp="Txt2ImgKiosk=-1:VBIDE=0:USESD=-1:USECOIN=0:modDatabase=-1:modSettings=-1:modFiles=-1:modGuid=-1:modCommon=-1:modGraphics=-1:modMain=-1:modProcess=-1:modFolders=-1:modKillVisible=-1:modKioskApp=-1:modReg64Bit=-1:modPeekPoke=-1:modBitValue=-1"
+
+[Neotext]
+CompCond="modMain=-1:modDatabase=-1:modSettings=-1:modFiles=-1:modGuid=-1:modCommon=-1:modGraphics=-1:modProcess=-1:modFolders=-1:modKillVisible=-1:modKioskApp=-1:modReg64Bit=-1:modPeekPoke=-1:modBitValue=-1"

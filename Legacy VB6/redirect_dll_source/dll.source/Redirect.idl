@@ -1,0 +1,63 @@
+// Redirect.idl : IDL source for Redirect.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (Redirect.tlb) and marshalling code.
+typedef enum {laOk = 0, laAlreadyRunning = 1, laWindowsError = 2} eStartResult;
+
+import "oaidl.idl";
+import "ocidl.idl";
+	[
+		object,
+		uuid(983145CD-C8DC-11D3-9DE4-40000A4A1541),
+		dual,
+		helpstring("IApplication Interface"),
+		pointer_default(unique)
+	]
+	interface IApplication : IDispatch
+	{
+		[propget, id(1), helpstring("The commandline for the application you want to start")] HRESULT Name([out, retval] BSTR *pVal);
+		[propput, id(1), helpstring("The commandline for the application you want to start")] HRESULT Name([in] BSTR newVal);
+		[id(2), helpstring("Starts the application")] HRESULT Start([out, retval] eStartResult *result);
+		[id(3), helpstring("Stops the application")] HRESULT Stop();
+		[propget, id(4), helpstring("Returns true if the application is running")] HRESULT Running([out, retval] VARIANT_BOOL *pVal);
+		[propget, id(5), helpstring("Gets the buffersize")] HRESULT BufferSize([out, retval] short *pVal);
+		[propput, id(5), helpstring("Sets the buffersize for reading the stdout of the application")] HRESULT BufferSize([in] short newVal);
+		[propget, id(6), helpstring("Gets the milliseconds to wait when there's nothing to read")] HRESULT Wait([out, retval] long *pVal);
+		[propput, id(6), helpstring("Sets the milliseconds to wait when there's nothing to read")] HRESULT Wait([in] long newVal);
+		[id(7), helpstring("Writes a string to the stdin of the application")] HRESULT Write([in] BSTR sCommandString, [out, retval] VARIANT_BOOL *pVal);
+		[propget, id(8), helpstring("property LastErrorNumber")] HRESULT LastErrorNumber([out, retval] long *pVal);
+	};
+
+[
+	uuid(983145C1-C8DC-11D3-9DE4-40000A4A1541),
+	version(1.0),
+	helpstring("Redirect 1.0 Type Library")
+]
+library RedirectLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(983145CF-C8DC-11D3-9DE4-40000A4A1541),
+		helpstring("_IApplicationEvents Interface")
+	]
+	dispinterface _IApplicationEvents
+	{
+		properties:
+		methods:
+		[id(1), helpstring("DataReceived - triggered when data is received from the stdout of the application")] HRESULT DataReceived([in] BSTR sData);
+		[id(2), helpstring("ProcessEnded - triggered when the process stopped")] HRESULT ProcessEnded();
+	};
+
+	[
+		uuid(983145CE-C8DC-11D3-9DE4-40000A4A1541),
+		helpstring("Application Class")
+	]
+	coclass Application
+	{
+		[default] interface IApplication;
+		[default, source] dispinterface _IApplicationEvents;
+	};
+};

@@ -1,0 +1,26 @@
+HKCR
+{
+	Redirect.Application.1 = s 'Application Class'
+	{
+		CLSID = s '{983145CE-C8DC-11D3-9DE4-40000A4A1541}'
+	}
+	Redirect.Application = s 'Application Class'
+	{
+		CLSID = s '{983145CE-C8DC-11D3-9DE4-40000A4A1541}'
+		CurVer = s 'Redirect.Application.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {983145CE-C8DC-11D3-9DE4-40000A4A1541} = s 'Application Class'
+		{
+			ProgID = s 'Redirect.Application.1'
+			VersionIndependentProgID = s 'Redirect.Application'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{983145C1-C8DC-11D3-9DE4-40000A4A1541}'
+		}
+	}
+}
