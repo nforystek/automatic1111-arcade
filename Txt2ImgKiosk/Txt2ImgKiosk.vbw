@@ -1,6 +1,6 @@
 frmMain = 99, 109, 1514, 584, C, 52, 52, 1467, 536, C
-modMain = 160, 42, 1574, 526, C
-modDatabase = 0, 0, 1415, 484, C
+modMain = 160, 42, 1574, 526, Z
+modDatabase = 0, 0, 1415, 484, 
 modSettings = 234, 234, 1616, 718, C
 Setting = 0, 0, 0, 0, C
 modDBFiles = 130, 130, 1545, 614, C

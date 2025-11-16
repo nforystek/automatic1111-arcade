@@ -31,10 +31,16 @@ Option Explicit
 '
 '  Other compile considtions that are not nessisarily used may be set for different module awareness are the module names as follows:
 '
-' modBitValue = -1 : modCOmmon = -1 : modDatabase = -1 : modFiles = -1 : modFolders = -1 : modGraphics = -1 : modGuid = -1
-' modKillVisible = -1 : modKioskApp = -1 : modMain = -1 : modPeekPoke = -1 : modProcess = -1 : modReg64Bit = -1 : modSettings = -1
+'  modBitValue = -1 : modCOmmon = -1 : modDatabase = -1 : modFiles = -1 : modFolders = -1 : modGraphics = -1 : modGuid = -1
+'  modKillVisible = -1 : modKioskApp = -1 : modMain = -1 : modPeekPoke = -1 : modProcess = -1 : modReg64Bit = -1 : modSettings = -1
 '
-' Last but not least the project name Txt2ImgKiosk = -1 is again for module awareness if, at all even used.
+'  Last but not least the project name Txt2ImgKiosk = -1 is again for module awareness if, at all even used.
+'
+' About setting it up:
+'
+'  A working automatic1111 webui with webui.bat is required, it will create a similar to webui-user.bat called mywebui.bat
+'  The application itself can run from with in the webui folder, or one level above if your automatic1111 folder is named:
+'  webui or stable-diffusion-webui or stable-diffusion-webui-master, tweakable in Sub Main(), also, see AppPath for detail.
 '
 '##########################################################
 
@@ -194,7 +200,6 @@ End Sub
 Public Sub Main()
 
     #If VBIDE = -1 Then
-
         ChDir AppPath
     #End If
 

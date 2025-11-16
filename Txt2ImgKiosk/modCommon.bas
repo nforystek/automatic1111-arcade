@@ -86,21 +86,12 @@ Public Function System64Bit() As Boolean
     System64Bit = is64Bit
 End Function
 
-Public Function AppPath(Optional ByVal RootEXEOf As Boolean = False) As String
-    Dim nLen As String
+Public Function AppPath() As String
     Dim lpTemp As String
-    If RootEXEOf Then
-        lpTemp = VBA.Space(256)
-        nLen = GetModuleFileName(0&, lpTemp, Len(lpTemp))
-        lpTemp = GetFilePath(Trim(Left(lpTemp, nLen)))
-        If Right(lpTemp, 1) <> "\" Then lpTemp = lpTemp & "\"
-    Else
-        lpTemp = IIf((Right(App.Path, 1) = "\"), App.Path, App.Path & "\")
-    End If
 #If VBIDE Then
-    If LCase(Right(lpTemp, 10)) = "\projects\" Then
-        lpTemp = Left(lpTemp, Len(lpTemp) - 10) & "\Binary\" 'Replace(lpTemp, "\Projects\", "\Binary\", , , vbTextCompare)
-     End If
+    lpTemp = "C:\Stable-diffusion\"
+#Else
+    lpTemp = IIf((Right(App.Path, 1) = "\"), App.Path, App.Path & "\")
 #End If
     AppPath = lpTemp
 End Function
