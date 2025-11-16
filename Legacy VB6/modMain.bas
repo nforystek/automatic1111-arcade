@@ -194,9 +194,8 @@ End Sub
 Public Sub Main()
 
     #If VBIDE = -1 Then
-    
+
         ChDir AppPath
-    
     #End If
 
     If Not App.PrevInstance Then
@@ -211,7 +210,9 @@ Public Sub Main()
         If dbOpen(True) Then 'ensure we can connect to the database
         
             'find automatic1111 between a couple of known variants from git and the apppath
+            
             SDPath = AppPath
+            
             If (Not PathExists(SDPath & "webui.bat", True)) Then
                 If (Not PathExists(SDPath & "webui", False)) Then
                     If (Not PathExists(SDPath & "stable-diffusion-webui", False)) Then
@@ -239,7 +240,7 @@ Public Sub Main()
                     "set VENV_DIR=" & vbCrLf & _
                     "Set SD_WEBUI_LOG_LEVEL = Info" & vbCrLf & _
                     "set COMMANDLINE_ARGS= --xformers --no-prompt-history --no-download-sd-model --do-not-download-clip" & _
-                    " --administrator --api --loglevel INFO --disable-tls-verify" & vbCrLf & _
+                    " --administrator --api --api-log --loglevel INFO --disable-tls-verify" & vbCrLf & _
                     "call webui.bat" & vbCrLf
             End If
             'write the special API python scripts used to generate images to this program
@@ -266,16 +267,22 @@ Public Sub Main()
                 If fldrExists Then
                     'write the sound FX to the music\SoundFX folder
                     CheckForSoundFX 1, "coindrop_1.mp3"
-                    CheckForSoundFX 2, "createimage_1.mp3"
-                    CheckForSoundFX 3, "idle_1.mp3"
-                    CheckForSoundFX 4, "idle_2.mp3"
-                    CheckForSoundFX 5, "idle_3.mp3"
-                    CheckForSoundFX 6, "idle_4.mp3"
-                    CheckForSoundFX 7, "idle_5.mp3"
-                    CheckForSoundFX 8, "idle_6.mp3"
+                    CheckForSoundFX 2, "generate_1.mp3"
+                    CheckForSoundFX 3, "ambient_1.mp3"
+                    CheckForSoundFX 4, "ambient_2.mp3"
+                    CheckForSoundFX 5, "ambient_3.mp3"
+                    CheckForSoundFX 6, "ambient_4.mp3"
+                    CheckForSoundFX 7, "ambient_5.mp3"
+                    CheckForSoundFX 8, "ambient_6.mp3"
                 End If
                 
                 On Error Resume Next
+                
+                #If USESD = -1 Then
+                    Do While ProcessRunning("python.exe", False)
+                        KillApp "python.exe"
+                    Loop
+                #End If
                 
                 Load frmMain
                 

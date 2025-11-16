@@ -1,5 +1,6 @@
 VERSION 5.00
 Begin VB.Form frmMain 
+   AutoRedraw      =   -1  'True
    BackColor       =   &H00FFFFFF&
    BorderStyle     =   1  'Fixed Single
    ClientHeight    =   10095
@@ -35,6 +36,7 @@ Begin VB.Form frmMain
    End
    Begin VB.PictureBox Picture4 
       Appearance      =   0  'Flat
+      AutoRedraw      =   -1  'True
       BackColor       =   &H00FFFFFF&
       BorderStyle     =   0  'None
       BeginProperty Font 
@@ -186,6 +188,7 @@ Begin VB.Form frmMain
       Width           =   4695
    End
    Begin VB.PictureBox Picture1 
+      AutoRedraw      =   -1  'True
       AutoSize        =   -1  'True
       BackColor       =   &H00FFFFFF&
       BorderStyle     =   0  'None
@@ -673,7 +676,7 @@ Public Sub ShowTab(ByVal cIndex As Integer)
     SetVisible Command4, (OnTab = TAB_VOTEONIMAGE) And (Credit > 0)
     
     EnableUI
-    
+
     If OnTab = TAB_GENERATE Then
         Text1_Change
         Text2_Change
@@ -929,9 +932,9 @@ Private Sub Form_Load()
     
     SetAllFonts
     
-    LoadMusicFiles CoinDrop, "coinin"
-    LoadMusicFiles Generate, "createimage"
-    LoadMusicFiles Ambient, "idle"
+    LoadMusicFiles CoinDrop, "coindrop"
+    LoadMusicFiles Generate, "generate"
+    LoadMusicFiles Ambient, "ambient"
     
     If bExecute Then
         oLaunch.Stop
@@ -1272,7 +1275,7 @@ End Sub
 
 Public Sub StartUp()
     On Error Resume Next
-    
+                
     SetState STATE_STARTUP
 
     ShowTab TAB_STARTUP
@@ -1364,7 +1367,11 @@ Private Sub oImager_DataReceived(ByVal sData As String)
             Set Picture1.Picture = pic
             
             SetState STATE_READY
-            
+
+
+            DoEvents
+    
+    
             Set pic = Nothing
             
             Set ss = Nothing
@@ -1378,10 +1385,11 @@ Private Sub oImager_DataReceived(ByVal sData As String)
             For X = 1 To Picture1.ScaleWidth / Screen.TwipsPerPixelX
                 For Y = 1 To Picture1.ScaleHeight / Screen.TwipsPerPixelY
                     If Not (Picture1.Point(X * Screen.TwipsPerPixelX, Y * Screen.TwipsPerPixelY) = vbBlack) Then
-                    Debug.Print Picture1.Point(X, Y)
                         C = True
+                        Exit For
                     End If
                 Next
+                If C Then Exit For
             Next
             If Not C Then
                 FileRemove ID
