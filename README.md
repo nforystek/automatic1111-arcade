@@ -7,4 +7,9 @@ The following Automatic1111 extensions are invovled/supported:
 stable-diffusion-webui-auto-tls-https	https://github.com/papuSpartan/stable-diffusion-webui-auto-tls-https.git
 stable-diffusion-webui-nsfw-censor	https://github.com/AUTOMATIC1111/stable-diffusion-webui-nsfw-censor.git
 
-The main application is written in Visual Basic 6 and there are two supporing C++ DLL's required, one of which is a Redirect.DLL that allows Visual Basic 6 to open console applications (not visible) and read/write to the console app such as if typing into "cmd.exe," and the second DLL is the 64bit version of inpout32.dll (or inpoutx64.dll) which is used to read IO data logics on a parallel port that this application does to hardware detect a coin box's switch when a coin is put in it.  The two DLL's source code are included in this repository,
+The main application is written in Visual Basic 6 and there are two supporing C++ DLL's required, one of which is a Redirect.DLL that allows Visual Basic 6 to open console applications (not visible) and read/write to the console app such as if typing into "cmd.exe," and the second DLL is the 64bit version of inpout32.dll (or inpoutx64.dll) which is used to read IO data logics on a parallel port that this application does to hardware detect a coin box's switch when a coin is put in it.  The two DLL's source code are included in this repository.
+
+IF YOU INTEND TO TRY TO RUN THIS PROGRAM, PLEASE READ THE COMPILE CONDITIONS COMMENTS IN THE SOURCE CODE CAREFULLY AS IT IS POSSIBLE TO LOCK YoU OUT OF THE SYSTEM LEAST THE POWER BUTTON AVAILABLE AND RECOVERY USED.
+
+The application runs as a Windows Shell with all restrictions nessisary to be a public Kiosk with a keyboard.  In a full production envrionment (inside a coin operated arcade box housing) auto logon to a password-less administrator account is the only thing required that does not setup with the code.
+
