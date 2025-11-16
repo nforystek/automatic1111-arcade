@@ -278,7 +278,11 @@ Public Sub Main()
                 
                 On Error Resume Next
                 
-                #If USESD = -1 Then
+                #If USESD = -1 And VBIDE = 0 Then
+                
+                    'you might not want this here but I keep gettting
+                    'SD starting up on incremented ports so debugging
+                    'it fails without it, and this is a Kiosk app
                     Do While ProcessRunning("python.exe", False)
                         KillApp "python.exe"
                     Loop
