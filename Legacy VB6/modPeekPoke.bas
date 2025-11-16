@@ -1,8 +1,20 @@
 Attribute VB_Name = "modPeekPoke"
 Option Explicit
 
-Public Const LPT1_32 = "&HD800"
-Public Const LPT1_64 = "&H3FF8"
+'###############################################################################
+'#########  FOR THE COIN OPERATION, THIS REQUIRES A PARALLEL PORT ##############
+'
+' If you have a parallel port you can find the LPT1 address defined in hes below
+' from the "Device Manager" by selecting your Parallel port's driver properties.
+'
+' By setting the value of B to all True, those data pins that are grounded (i.e.
+' the normally open circut closes via the coin box switch), where I'm using pin7
+' will then be False upon reading the port back into the B variable.
+'
+'##############################################################################
+
+'Public Const LPT1 = "&HD800" 'this is what it is on my XP system
+Public Const LPT1 = "&H3FF8" 'this is what it is on my Windows 11 system
 
 Public Declare Function Inp32 Lib "inpout32.dll" (ByVal port As Integer) As Integer
 Public Declare Sub Out32 Lib "inpout32.dll" (ByVal port As Integer, ByVal Info As Integer)
@@ -22,9 +34,9 @@ Public Function CoinCheck() As Boolean
     BitWord(b, Bit7) = True
     BitWord(b, Bit8) = True
 
-    Out32 CInt(Val(LPT1_64)), b
+    Out32 CInt(Val(LPT1)), b
     
-    b = Inp32(CInt(Val(LPT1_64)))
+    b = Inp32(CInt(Val(LPT1)))
 
     If Not BitWord(b, Bit7) Then
         CoinCheck = True
