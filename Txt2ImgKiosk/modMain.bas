@@ -42,6 +42,14 @@ Option Explicit
 '  The application itself can run from with in the webui folder, or one level above if your automatic1111 folder is named:
 '  webui or stable-diffusion-webui or stable-diffusion-webui-master, tweakable in Sub Main(), also, see AppPath for detail.
 '
+'  Put the redirect.dll ad inpout32.dll in the same folder as te txt2imgkiosk.exe and give full pemisions to the logged in
+'  account (which should have administrator rights) and "Local Acount."  Also set the .exe compatiility or all used to
+'  "Run as Administrator."  Before you run the application, find a jump drive to make a file with the name "KIOSK" no ext,
+'  in the file edited as a text document, add only the following guid as a single line of text (you can change it in the code)
+'  6E98DE51-5380-D7AC-D780-5351DE986E6E
+'
+'  To escape the Kiosk mode, you put the jump drive in.
+'
 '##########################################################
 
 Public LastError As String
