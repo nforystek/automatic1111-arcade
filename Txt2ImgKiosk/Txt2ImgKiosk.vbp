@@ -1,7 +1,7 @@
 Type=Exe
-Reference=*\G{2A75196C-D9EB-4129-B803-931327F72D5C}#2.8#0#..\..\..\..\..\..\..\Program Files (x86)\Common Files\System\ado\msado28.tlb#Microsoft ActiveX Data Objects 2.8 Library
-Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#..\..\..\..\..\..\..\Windows\SysWOW64\stdole2.tlb#OLE Automation
-Reference=*\G{983145C1-C8DC-11D3-9DE4-40000A4A1541}#1.0#0#..\..\..\..\..\..\..\stable-diffusion\redirect.dll#Redirect 1.0 Type Library
+Reference=*\G{2A75196C-D9EB-4129-B803-931327F72D5C}#2.8#0#..\..\..\Program Files (x86)\Common Files\System\ado\msado28.tlb#Microsoft ActiveX Data Objects 2.8 Library
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#..\..\..\Windows\SysWOW64\stdole2.tlb#OLE Automation
+Reference=*\G{983145C1-C8DC-11D3-9DE4-40000A4A1541}#1.0#0#..\..\..\stable-diffusion\redirect.dll#Redirect 1.0 Type Library
 Form=frmMain.frm
 Module=modMain; modMain.bas
 Module=modDatabase; modDatabase.bas

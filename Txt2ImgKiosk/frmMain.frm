@@ -687,10 +687,13 @@ Public Sub ShowTab(ByVal cIndex As Integer)
         On Error Resume Next
         Picture4.SetFocus
     ElseIf OnTab = TAB_VIEWIMAGE Then
-        If Picture1.Picture Is LoadPicture("") Then
+    
+        If (Picture1.Tag = 0) Then
             SetCaption Label1, "No generated image yet!"
-        Else
-            
+        ElseIf (Picture1.Tag = 1) Then
+            SetCaption Label1, "Your Genreated Image:"
+        ElseIf (Picture1.Tag = 2) Then
+            SetCaption Label1, "Last Genreated Image:"
         End If
         Set Image1.Picture = Nothing
         On Error Resume Next
@@ -698,6 +701,10 @@ Public Sub ShowTab(ByVal cIndex As Integer)
     ElseIf OnTab = TAB_LEADERBOARD Then
         SetCaption Label1, "Last Genreated Image:"
         ViewWinner
+    ElseIf OnTab = TAB_NOCREDIT Then
+        If Picture1.Tag = 1 Then
+            Picture1.Tag = 2
+        End If
     End If
 
 End Sub
@@ -929,6 +936,7 @@ End Sub
 Private Sub Form_Load()
 
     On Error Resume Next
+    Picture1.Tag = 0
     
     SetAllFonts
     
@@ -1359,18 +1367,19 @@ Private Sub oImager_DataReceived(ByVal sData As String)
             
             ID = FilePutArray(Replace(ImageName, ".bmp", ""), ss.Partial, IIf(Text1.Text = Text1GreyText, "", Text1.Text), IIf(Text2.Text = Text2GreyText, "", Text2.Text))
             
-            SetCaption Label1, "Your Genreated Image:"
+            Picture1.Tag = 1
             
             ShowTab TAB_VIEWIMAGE
             
             Set Image1.Picture = pic
             Set Picture1.Picture = pic
+
             
             SetState STATE_READY
 
-
             DoEvents
     
+
     
             Set pic = Nothing
             
@@ -1408,7 +1417,7 @@ Private Sub oImager_DataReceived(ByVal sData As String)
 
         ElseIf process Then
             
-            ss.Concat modCommon.Convert(uu.Decode(Right(inline, Len(inline) - 1)))
+            ss.Concat Convert(uu.Decode(Right(inline, Len(inline) - 1)))
         
         End If
         
