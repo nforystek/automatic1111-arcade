@@ -205,30 +205,20 @@ Begin VB.Form frmMain
       Height          =   2925
       Left            =   360
       ScaleHeight     =   2925
-      ScaleWidth      =   3480
+      ScaleWidth      =   4680
       TabIndex        =   2
       Top             =   2520
       Visible         =   0   'False
-      Width           =   3480
+      Width           =   4680
       Begin VB.Label Label4 
          Alignment       =   2  'Center
          BackStyle       =   0  'Transparent
-         Caption         =   "Content not suitable for all viewers was detected and it has been censored."
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   13.5
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00E0E0E0&
-         Height          =   1155
+         Caption         =   "Content not suitable for all viewers was detected and it has been censored. Your credits have been refunded."
+         ForeColor       =   &H00FFFFFF&
+         Height          =   1515
          Left            =   240
          TabIndex        =   17
          Top             =   180
-         Visible         =   0   'False
          Width           =   4185
       End
       Begin VB.Image Image1 
@@ -1068,8 +1058,8 @@ Private Sub Form_Resize()
     Picture4.Width = Picture1.Width
     Picture4.Height = Picture1.Height
     
-    Label4.Top = Picture1.Height / 2 - Label4.Height / 2
-    Label4.Left = Picture1.Width / 2 - Label4.Width / 2
+    Label4.Top = (Picture1.Height / 2) - (Label4.Height / 2)
+    Label4.Left = (Picture1.Width / 2) - (Label4.Width / 2)
     
     Dim cnt As Long
     For cnt = Image5.LBound To Image5.UBound
@@ -1363,7 +1353,7 @@ Private Sub oImager_DataReceived(ByVal sData As String)
             Set pic = PictureFromByteStream(ss.Partial)
             
             Dim ID As Long
-            Label4.Visible = False
+            SetVisible Label4, False
             
             ID = FilePutArray(Replace(ImageName, ".bmp", ""), ss.Partial, IIf(Text1.Text = Text1GreyText, "", Text1.Text), IIf(Text2.Text = Text2GreyText, "", Text2.Text))
             
@@ -1373,13 +1363,6 @@ Private Sub oImager_DataReceived(ByVal sData As String)
             
             Set Image1.Picture = pic
             Set Picture1.Picture = pic
-
-            
-            SetState STATE_READY
-
-            DoEvents
-    
-
     
             Set pic = Nothing
             
@@ -1391,8 +1374,8 @@ Private Sub oImager_DataReceived(ByVal sData As String)
             Dim X As Single
             Dim Y As Single
             Dim C As Boolean
-            For X = 1 To Picture1.ScaleWidth / Screen.TwipsPerPixelX
-                For Y = 1 To Picture1.ScaleHeight / Screen.TwipsPerPixelY
+            For X = 0 To (Picture1.ScaleWidth / Screen.TwipsPerPixelX) - 1
+                For Y = 0 To (Picture1.ScaleHeight / Screen.TwipsPerPixelY) - 1
                     If Not (Picture1.Point(X * Screen.TwipsPerPixelX, Y * Screen.TwipsPerPixelY) = vbBlack) Then
                         C = True
                         Exit For
@@ -1400,24 +1383,25 @@ Private Sub oImager_DataReceived(ByVal sData As String)
                 Next
                 If C Then Exit For
             Next
+            SetState STATE_READY
             If Not C Then
                 FileRemove ID
                 Credit = Credit + CREDIT_TOGENERATE
-                SetState STATE_READY
-                Label4.Visible = True
+                SetVisible Label4, True
             Else
-                Label4.Visible = False
+                SetVisible Label4, False
             End If
             
+            
             If Timer1.Enabled Then
-                Timer1.Enabled = False
+                SetEnabled Timer1, False
                 Timer1.Interval = TIMER_NOCREDITS
-                Timer1.Enabled = True
+                SetEnabled Timer1, True
             End If
 
         ElseIf process Then
             
-            ss.Concat Convert(uu.Decode(Right(inline, Len(inline) - 1)))
+            ss.Concat StrConv(uu.Decode(Right(inline, Len(inline) - 1)), vbFromUnicode)
         
         End If
         
