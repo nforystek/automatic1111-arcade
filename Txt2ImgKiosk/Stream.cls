@@ -16,41 +16,34 @@ Option Explicit
 Option Compare Binary
 
 Public Enum MemoryScopes
-    heap = 0
+    Heap = 0
     Locking = 1
     [Local] = 2
     [Global] = 4
 End Enum
 
-Private pScope As MemoryScopes
-Private Pointer As Long
+Private Const HEAP_NO_SERIALIZE = &H1
 
 Private Const LMEM_DISCARDABLE = &HF00
 Private Const LMEM_FIXED = &H0
 Private Const LMEM_ZEROINIT = &H40
+Private Const LMEM_MOVEABLE = &H2
+Private Const LPTR = &H40
 
 Private Const GMEM_DISCARDABLE = &H100
 Private Const GMEM_FIXED = &H0
-
-Private Const HEAP_NO_SERIALIZE = &H1
-
-Private Const LMEM_MOVEABLE = &H2
-Private Const lPtr = &H40
-
 Private Const GMEM_MOVEABLE = &H2
 Private Const GPTR = &H40
-
-Private Declare Function AryPtr Lib "msvbvm60" Alias "VarPtr" (ary() As Any) As Long
  
 Private Declare Sub RtlMoveMemory Lib "kernel32" (Destination As Any, Source As Any, ByVal Length As Long)
 
-'&H11000000
-Private Declare Function GetCurrentProcess Lib "kernel32" () As Long
-Private Declare Function FlushFileBuffers Lib "kernel32" (ByVal hFile As Long) As Long
-Private Declare Function FlushInstructionCache Lib "kernel32" (ByVal hProcess As Long, lpBaseAddress As Any, ByVal dwSize As Long) As Long
-Private Declare Function GetModuleHandle Lib "kernel32" Alias "GetModuleHandleA" (ByVal lpModuleName As String) As Long
-Private Declare Function GetProcAddress Lib "kernel32" (ByVal hModule As Long, ByVal lpProcName As String) As Long
+Private Declare Function GetProcessHeap Lib "kernel32" () As Long
 
+Private Declare Function HeapAlloc Lib "kernel32" (ByVal hHeap As Long, ByVal dwFlags As Long, ByVal dwBytes As Long) As Long
+Private Declare Function HeapFree Lib "kernel32" (ByVal hHeap As Long, ByVal dwFlags As Long, ByVal lpMem As Long) As Long
+Private Declare Function HeapLock Lib "kernel32" (ByVal hHeap As Long) As Long
+Private Declare Function HeapReAlloc Lib "kernel32" (ByVal hHeap As Long, ByVal dwFlags As Long, ByVal lpMem As Long, ByVal dwBytes As Long) As Long
+Private Declare Function HeapUnlock Lib "kernel32" (ByVal hHeap As Long) As Long
 Private Declare Function HeapSize Lib "kernel32" (ByVal hHeap As Long, ByVal dwFlags As Long, lpMem As Any) As Long
 
 Private Declare Function LocalAlloc Lib "kernel32" (ByVal wFlags As Long, ByVal wBytes As Long) As Long
@@ -66,84 +59,9 @@ Private Declare Function GlobalLock Lib "kernel32" (ByVal hMem As Long) As Long
 Private Declare Function GlobalReAlloc Lib "kernel32" (ByVal hMem As Long, ByVal dwBytes As Long, ByVal wFlags As Long) As Long
 Private Declare Function GlobalUnlock Lib "kernel32" (ByVal hMem As Long) As Long
 Private Declare Function GlobalSize Lib "kernel32" (ByVal hMem As Long) As Long
-Private Declare Function GlobalFlags Lib "kernel32" (ByVal hMem As Long) As Long
 
-Private Declare Function HeapUnlock Lib "kernel32" (ByVal hHeap As Long) As Long
-Private Declare Function HeapLock Lib "kernel32" (ByVal hHeap As Long) As Long
-Private Declare Function HeapAlloc Lib "kernel32" (ByVal hHeap As Long, ByVal dwFlags As Long, ByVal dwBytes As Long) As Long
-Private Declare Function HeapFree Lib "kernel32" (ByVal hHeap As Long, ByVal dwFlags As Long, ByVal lpMem As Long) As Long
-Private Declare Function HeapReAlloc Lib "kernel32" (ByVal hHeap As Long, ByVal dwFlags As Long, ByVal lpMem As Long, ByVal dwBytes As Long) As Long
-Private Declare Function GetProcessHeap Lib "kernel32" () As Long
-
-Private Const READ_CONTROL = &H20000
-
-Private Const SYNCHRONIZE = &H100000
-Private Const FILE_READ_ATTRIBUTES = (&H80)              '  all
-Private Const FILE_READ_DATA = (&H1)                     '  file pipe
-Private Const FILE_READ_EA = (&H8)                       '  file directory
-Private Const STANDARD_RIGHTS_READ = (READ_CONTROL)
-Private Const FILE_APPEND_DATA = (&H4)                   '  file
-Private Const FILE_WRITE_ATTRIBUTES = (&H100)            '  all
-Private Const FILE_WRITE_DATA = (&H2)                    '  file pipe
-Private Const FILE_WRITE_EA = (&H10)                     '  file directory
-Private Const STANDARD_RIGHTS_WRITE = (READ_CONTROL)
-Private Const FILE_GENERIC_READ = (STANDARD_RIGHTS_READ Or FILE_READ_DATA Or FILE_READ_ATTRIBUTES Or FILE_READ_EA Or SYNCHRONIZE)
-Private Const FILE_GENERIC_WRITE = (STANDARD_RIGHTS_WRITE Or FILE_WRITE_DATA Or FILE_WRITE_ATTRIBUTES Or FILE_WRITE_EA Or FILE_APPEND_DATA Or SYNCHRONIZE)
-
-Private Const FILE_SHARE_READ = &H1
-Private Const FILE_SHARE_WRITE = &H2
-
-Private Const FILE_FLAG_RANDOM_ACCESS = &H10000000
-Private Const FILE_FLAG_WRITE_THROUGH = &H80000000
-Private Const FILE_FLAG_SEQUENTIAL_SCAN = &H8000000
-
-Private Const FILE_ATTRIBUTE_NORMAL = &H80
-Private Const FILE_ATTRIBUTE_TEMPORARY = &H100
-Private Const FILE_FLAG_DELETE_ON_CLOSE = &H4000000
-
-Private Const INVALID_SET_FILE_POINTER = -1
-
-Private Type SECURITY_ATTRIBUTES
-        nLength As Long
-        lpSecurityDescriptor As Long
-        bInheritHandle As Long
-End Type
-
-Private Const CREATE_ALWAYS = 2
-Private Const OPEN_ALWAYS = 4
-Private Const CREATE_NEW = 1
-
-Private Type OVERLAPPED
-        Internal As Long
-        InternalHigh As Long
-        Offset As Long
-        OffsetHigh As Long
-        hEvent As Long
-End Type
-
-Private Declare Function VarPtrArray Lib "MSVBVM60.DLL" Alias "VarPtr" (Var() As Any) As Long
-Private Declare Function StrCpy Lib "kernel32" Alias "lstrcpyA" (ByVal lpString1 As String, ByVal lpString2 As Long) As Long
-Private Declare Function StrCpyReverse Lib "kernel32" Alias "lstrcpyA" (ByVal lpString1 As Long, ByVal lpString2 As String) As Long
-Private Declare Function StrLen Lib "kernel32" Alias "lstrlenA" (ByVal lpString As Long) As Long
-
-Private Declare Function CreateFile Lib "kernel32" Alias "CreateFileA" (ByVal lpFileName As String, ByVal dwDesiredAccess As Long, ByVal dwShareMode As Long, lpSecurityAttributes As SECURITY_ATTRIBUTES, ByVal dwCreationDisposition As Long, ByVal dwFlagsAndAttributes As Long, ByVal hTemplateFile As Long) As Long
-Private Declare Function GetFileSize Lib "kernel32" (ByVal hFile As Long, lpFileSizeHigh As Long) As Long
-
-Private Declare Function hWriteFile Lib "kernel32" Alias "WriteFile" (ByVal hFile As Long, lpBuffer As Any, ByVal nNumberOfBytesToWrite As Long, lpNumberOfBytesWritten As Long, lpOverlapped As OVERLAPPED) As Long
-Private Declare Function hReadFile Lib "kernel32" Alias "ReadFile" (ByVal hFile As Long, lpBuffer As Any, ByVal nNumberOfBytesToRead As Long, lpNumberOfBytesRead As Long, lpOverlapped As OVERLAPPED) As Long
-Private Declare Function SetEndOfFile Lib "kernel32" (ByVal hFile As Long) As Long
-Private Declare Function CloseHandle Lib "kernel32" (ByVal hObject As Long) As Long
-Private Declare Function SetFilePointer Lib "kernel32" (ByVal hFile As Long, ByVal lDistanceToMove As Long, lpDistanceToMoveHigh As Long, ByVal dwMoveMethod As Long) As Long
-
-Private Const MAX_PATH = 260
-
-Private Declare Function GetModuleFileName Lib "kernel32" Alias "GetModuleFileNameA" (ByVal hModule As Long, ByVal lpFileName As String, ByVal nSize As Long) As Long
-
-Private Declare Function GetWindowsDirectory Lib "kernel32" Alias "GetWindowsDirectoryA" (ByVal lpBuffer As String, ByVal nSize As Long) As Long
-Private Declare Function GetTempFileName Lib "kernel32" Alias "GetTempFileNameA" (ByVal lpszPath As String, ByVal lpPrefixString As String, ByVal wUnique As Long, ByVal lpTempFileName As String) As Long
-Private Declare Function GetTempPath Lib "kernel32" Alias "GetTempPathA" (ByVal nBufferLength As Long, ByVal lpBuffer As String) As Long
-Private Declare Function GetLastError Lib "kernel32" () As Long
-
+Private pScope As MemoryScopes
+Private Pointer As Long
 
 Public Property Get Address(Optional ByVal Offset As Long = 0) As Long ' _
 Retrieves the address numberical value where the memory this object is allocated at.
@@ -156,7 +74,7 @@ Retrieves the type of memory functionally this stream is utilizing, Heap, Lockin
 End Property
 
 Private Sub Class_Initialize()
-    pScope = MemoryScopes.heap
+    pScope = MemoryScopes.Heap
     'pScope = MemoryScopes.[Local] Or MemoryScopes.Locking
 End Sub
 
@@ -172,7 +90,7 @@ Private Sub MemoryModify(Optional ByVal Size As Long = 0)
                 If LocalUnlock(Pointer) <> 0 Then Err.Raise 8, App.Title, "Local memory unlock failure."
             ElseIf ((Scope And MemoryScopes.Global) = MemoryScopes.Global) Then
                 If GlobalUnlock(Pointer) <> 1 Then Err.Raise 8, App.Title, "Global memory unlock failure."
-            ElseIf ((Scope And MemoryScopes.heap) = MemoryScopes.heap) Then
+            ElseIf ((Scope And MemoryScopes.Heap) = MemoryScopes.Heap) Then
                 If HeapUnlock(GetProcessHeap) = 0 Then Err.Raise 8, App.Title, "Heap memory unlock failure."
             End If
         End If
@@ -184,7 +102,7 @@ Private Sub MemoryModify(Optional ByVal Size As Long = 0)
                 LocalFree Pointer
             ElseIf ((pScope And MemoryScopes.Global) = MemoryScopes.Global) Then
                 GlobalFree Pointer
-            ElseIf ((pScope And MemoryScopes.heap) = MemoryScopes.heap) Then
+            ElseIf ((pScope And MemoryScopes.Heap) = MemoryScopes.Heap) Then
                 HeapFree GetProcessHeap, 0, ByVal Pointer
             End If
             Pointer = 0
@@ -195,15 +113,15 @@ Private Sub MemoryModify(Optional ByVal Size As Long = 0)
                 Pointer = LocalAlloc(LMEM_MOVEABLE And VarPtr(Pointer), Size)
             ElseIf ((pScope And MemoryScopes.Global) = MemoryScopes.Global) Then
                 Pointer = GlobalAlloc(GMEM_MOVEABLE And VarPtr(Pointer), Size)
-            ElseIf ((pScope And MemoryScopes.heap) = MemoryScopes.heap) Then
+            ElseIf ((pScope And MemoryScopes.Heap) = MemoryScopes.Heap) Then
                 Pointer = HeapAlloc(GetProcessHeap, 0, Size)
             End If
         Else
             If ((pScope And MemoryScopes.Local) = MemoryScopes.Local) Then
-                Pointer = LocalReAlloc(Pointer, Size, LMEM_MOVEABLE Or lPtr)
+                Pointer = LocalReAlloc(Pointer, Size, LMEM_MOVEABLE Or LPTR)
             ElseIf ((pScope And MemoryScopes.Global) = MemoryScopes.Global) Then
                 Pointer = GlobalReAlloc(Pointer, Size, GMEM_MOVEABLE Or GPTR)
-            ElseIf ((pScope And MemoryScopes.heap) = MemoryScopes.heap) Then
+            ElseIf ((pScope And MemoryScopes.Heap) = MemoryScopes.Heap) Then
                 Pointer = HeapReAlloc(GetProcessHeap, 0, ByVal Pointer, Size)
             End If
         End If
@@ -215,7 +133,7 @@ Private Sub MemoryModify(Optional ByVal Size As Long = 0)
                 If Pointer <> LocalLock(Pointer) Then Err.Raise 8, App.Title, "Local memory lock mismatch."
             ElseIf ((Scope And MemoryScopes.Global) = MemoryScopes.Global) Then
                 If Pointer <> GlobalLock(Pointer) Then Err.Raise 8, App.Title, "Global memory lock mismatch."
-            ElseIf ((Scope And MemoryScopes.heap) = MemoryScopes.heap) Then
+            ElseIf ((Scope And MemoryScopes.Heap) = MemoryScopes.Heap) Then
                 If HeapLock(GetProcessHeap) = 0 Then Err.Raise 8, App.Title, "Heap memory lock mismatch."
             End If
         End If
@@ -262,7 +180,7 @@ Gets the amount of bytes with in this instance of the stream object.
             Length = LocalSize(Pointer)
         ElseIf ((pScope And MemoryScopes.Global) = MemoryScopes.Global) Then
             Length = GlobalSize(Pointer)
-        ElseIf ((pScope And MemoryScopes.heap) = MemoryScopes.heap) Then
+        ElseIf ((pScope And MemoryScopes.Heap) = MemoryScopes.Heap) Then
             Length = HeapSize(GetProcessHeap, 0, ByVal Pointer)
         End If
     Else

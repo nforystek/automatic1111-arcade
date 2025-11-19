@@ -2,78 +2,14 @@ Attribute VB_Name = "modCommon"
 #Const modCommon = -1
 Option Explicit
 
-Public Declare Function GetCurrentProcessId Lib "kernel32" () As Long
-Private Declare Function GetModuleFileName Lib "kernel32" Alias "GetModuleFileNameA" (ByVal hModule As Long, ByVal lpFileName As String, ByVal nSize As Long) As Long
-Private Declare Function GetProcAddress Lib "kernel32" (ByVal hModule As Long, ByVal lpProcName As String) As Long
 Private Declare Function GetCurrentProcess Lib "kernel32" () As Long
+Public Declare Function GetCurrentProcessId Lib "kernel32" () As Long
 
-Private Declare Function IsWow64Process Lib "kernel32" (ByVal hProc As Long, ByRef bWow64Process As Boolean) As Long
+Private Declare Function GetModuleFileName Lib "kernel32" Alias "GetModuleFileNameA" (ByVal hModule As Long, ByVal lpFileName As String, ByVal nSize As Long) As Long
 Private Declare Function GetModuleHandle Lib "kernel32" Alias "GetModuleHandleA" (ByVal lpModuleName As String) As Long
 
-Public Function ArraySize(InArray, Optional ByVal InBytes As Boolean = False) As Long
-On Error GoTo dimerror
-
-    Static dimcheck As Long
-
-    If UBound(InArray) = -1 Or LBound(InArray) = -1 Then
-        ArraySize = 0
-    Else
-        ArraySize = (UBound(InArray) + -CInt(Not CBool(-LBound(InArray)))) * IIf(InBytes, LenB(InArray(LBound(InArray))), 1)
-    End If
-    Exit Function
-startover:
-    Err.Clear
-    On Error GoTo -1
-    On Error GoTo 0
-    On Error GoTo dimerror
-    If UBound(InArray, dimcheck) = -1 Or LBound(InArray, dimcheck) = -1 Then
-        ArraySize = 0
-    Else
-        ArraySize = (UBound(InArray, dimcheck) + -CInt(Not CBool(-LBound(InArray, dimcheck)))) * IIf(InBytes, LenB(InArray(LBound(InArray, dimcheck), LBound(InArray, dimcheck - 1))), 1)
-    End If
-    
-    Exit Function
-dimerror:
-    If dimcheck = 0 Then
-        dimcheck = 2
-        Err.Clear
-        GoTo startover
-    End If
-    ArraySize = 0
-End Function
-
-Public Function Convert(Info)
-    Dim N As Long
-    Dim out() As Byte
-    Dim Ret As String
-    Select Case VBA.TypeName(Info)
-        Case "String"
-            If Len(Info) > 0 Then
-                ReDim out(0 To Len(Info) - 1) As Byte
-                For N = 0 To Len(Info) - 1
-                    out(N) = Asc(Mid(Info, N + 1, 1))
-                Next
-            Else
-                ReDim out(-1 To -1) As Byte
-            End If
-            Convert = out
-        Case "Byte()"
-            If (ArraySize(Info) > 0) Then
-                On Error GoTo dimcheck
-                For N = LBound(Info) To UBound(Info)
-                    Ret = Ret & Chr(Info(N))
-                Next
-            End If
-            Convert = Ret
-    End Select
-    Exit Function
-dimcheck:
-    If Err Then Err.Clear
-    For N = LBound(Info, 2) To UBound(Info, 2)
-        Ret = Ret & Chr(Info(0, N))
-    Next
-    Convert = Ret
-End Function
+Private Declare Function IsWow64Process Lib "kernel32" (ByVal hProc As Long, ByRef bWow64Process As Boolean) As Long
+Private Declare Function GetProcAddress Lib "kernel32" (ByVal hModule As Long, ByVal lpProcName As String) As Long
 
 Public Function System64Bit() As Boolean
     Dim handle As Long
@@ -97,6 +33,7 @@ Public Function AppPath() As String
 End Function
 
 Public Function NextArg(ByVal TheParams As String, ByVal TheSeperator As String, Optional ByVal Compare As VbCompareMethod = vbBinaryCompare, Optional ByVal TrimResult As Boolean = True) As String
+    'returns the next argument in TheParams, where TheSeperator is the delimiter, and does not change TheParams
     If TrimResult Then
         If InStr(1, TheParams, TheSeperator, Compare) > 0 Then
             NextArg = Trim(Left(TheParams, InStr(1, TheParams, TheSeperator, Compare) - 1))
@@ -113,6 +50,7 @@ Public Function NextArg(ByVal TheParams As String, ByVal TheSeperator As String,
 End Function
 
 Public Function RemoveArg(ByVal TheParams As String, ByVal TheSeperator As String, Optional ByVal Compare As VbCompareMethod = vbBinaryCompare, Optional ByVal TrimResult As Boolean = True) As String
+    'returns the TheParams, with out the next argument where TheSeperator is the delimiter, and does not change TheParams
     If TrimResult Then
         If InStr(1, TheParams, TheSeperator, Compare) > 0 Then
             RemoveArg = Trim(Mid(TheParams, InStr(1, TheParams, TheSeperator, Compare) + Len(TheSeperator), Len(TheParams) - Len(TheSeperator)))
@@ -129,6 +67,7 @@ Public Function RemoveArg(ByVal TheParams As String, ByVal TheSeperator As Strin
 End Function
 
 Public Function RemoveNextArg(ByRef TheParams As Variant, ByVal TheSeperator As String, Optional ByVal Compare As VbCompareMethod = vbBinaryCompare, Optional ByVal TrimResult As Boolean = True) As String
+    'returns the next argument in TheParams, where TheSeperator is the delimiter and modifies TheParams to exclude it.
     If TrimResult Then
         If InStr(1, TheParams, TheSeperator, Compare) > 0 Then
             RemoveNextArg = Trim(Left(TheParams, InStr(1, TheParams, TheSeperator, Compare) - 1))
