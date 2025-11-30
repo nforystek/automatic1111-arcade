@@ -1,6 +1,6 @@
 # automatic1111-arcade
 
-!\[Stable Diffusion Automatic1111 Arcade](./sd-arcade.png)
+<img src="./sd-arcade.png" alt="Stable Diffusion Automatic1111 Arcade" width="200"/>
 
 
 
