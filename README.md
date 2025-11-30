@@ -1,6 +1,6 @@
 # automatic1111-arcade
 
-!\[Stable Diffusion Automatic1111 Arcade](./sd-arcade.jpg)
+!\[Stable Diffusion Automatic1111 Arcade](./sd-arcade.png)
 
 
 
