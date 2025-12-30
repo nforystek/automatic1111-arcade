@@ -25,7 +25,7 @@
 <table><tr><td>
 <img src="./ScreenShots/Screenshot (07).png" alt="A generated image screen from the prompt." width="320" height="240"/>
 </td><td>
-<img src="./ScreenShots/Screenshot (08).png" alt="A gallery screen, allowing you may vote." width="632040" height="240"/>
+<img src="./ScreenShots/Screenshot (08).png" alt="A gallery screen, allowing you may vote." width="320" height="240"/>
 </td></tr></table>
 
 <table><tr><td>
