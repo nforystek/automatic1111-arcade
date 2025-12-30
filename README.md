@@ -58,3 +58,38 @@ The application runs as a Windows Shell with all restrictions necessary to be a 
 and would be required to boot it straight into the shell.  Just ask CoPilot "What are the registry entries used to auto login to a password-less account on Windows 11?"
 
 CoPilot basically wrote most the Visual Basic 6 registry module and the Txt2Img2Txt.py Python.
+
+
+The flow of the screens:
+
+#####################################################################################################################
+################################################## Idle mode ########################################################
+#####################################################################################################################
+
+
+>--> Self Advertisement Screen...  -Time-out->  Leaderboard Screen...  -Time-out-1->  Show 1st Place...
+^---------------------------------------------------------------<      -Time-out-2->  Show 2nd Place...
+>---> Time-out->  Random Casino idle Machine Sound              |      - "  - "  +->  Show up to 12...  
+^-----------------<------------------------------V              ^------<-----------<   <--------------V
+
+#####################################################################################################################
+############################################## Insert 1x0.25 coin ###################################################
+#####################################################################################################################
+
+Coin Drop into a Machine Sound ---> Text Prompt Screen + 3 Credits Added. ---> -click-generate-> --V
+V-------------------------------< Transformers Changing Sound <------------------------------------< 
+Single Image View Screen >-----> Gallery Election Browser >-----> -alt-key-> Cast 1 Vote For Image
+                                 V                      V
+Last Gallery Image <-left-image- <                      > -right-arrow-> Next Gallery Image
+
+#####################################################################################################################
+################################################ Notes ##############################################################
+#####################################################################################################################
+
+
+With/out credits, Next and Previous buttons (Page Up and Page Down) switch between switch between the advertisement,
+leader board, and F1 to F12 keys can be used to see what image is in and 1st to 12th place respectively to the F key.
+
+#####################################################################################################################
+#####################################################################################################################
+#####################################################################################################################
