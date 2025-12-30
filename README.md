@@ -1,32 +1,46 @@
 # automatic1111-arcade
-
+<p align=middle>
+<center>
 <img src="./sd-arcade.png" alt="Stable Diffusion Automatic1111 Arcade" width="200"/>
 
 
-<img src="./ScreenShots/Screenshot (01).png" alt="The startup screen." width="640" height="480"/>
+<table><tr><td>
+<img src="./ScreenShots/Screenshot (01).png" alt="The startup screen." width="320" height="240"/>
+</td><td>
+<img src="./ScreenShots/Screenshot (02).png" alt="Main periodic ad screen." width="320" height="240"/>
+</td></tr></table>
 
-<img src="./ScreenShots/Screenshot (02).png" alt="Main periodic ad screen." width="640" height="480"/>
+<table><tr><td>
+<img src="./ScreenShots/Screenshot (03).png" alt="An empty leaderboard screen." width="320" height="240"/>
+</td><td>
+<img src="./ScreenShots/Screenshot (04).png" alt="A blank prompt screen." width="320" height="240"/>
+</td></tr></table>
 
-<img src="./ScreenShots/Screenshot (03).png" alt="An empty leaderboard screen." width="640" height="480"/>
+<table><tr><td>
+<img src="./ScreenShots/Screenshot (05).png" alt="No images generated screen." width="320" height="240"/>
+</td><td>
+<img src="./ScreenShots/Screenshot (06).png" alt="A prompt screen with a prompt entry." width="320" height="240"/>
+</td></tr></table>
 
-<img src="./ScreenShots/Screenshot (04).png" alt="A blank prompt screen." width="640" height="480"/>
+<table><tr><td>
+<img src="./ScreenShots/Screenshot (07).png" alt="A generated image screen from the prompt." width="320" height="240"/>
+</td><td>
+<img src="./ScreenShots/Screenshot (08).png" alt="A gallery screen, allowing you may vote." width="632040" height="240"/>
+</td></tr></table>
 
-<img src="./ScreenShots/Screenshot (05).png" alt="No images generated screen." width="640" height="480"/>
+<table><tr><td>
+<img src="./ScreenShots/Screenshot (09).png" alt="A screenshot after of a voted on image." width="320" height="240"/>
+</td><td>
+<img src="./ScreenShots/Screenshot (10).png" alt="A leaderboard with some images in it." width="320" height="240"/>
+</td></tr></table>
 
-<img src="./ScreenShots/Screenshot (06).png" alt="A prompt screen with a prompt entry." width="640" height="480"/>
+<table><tr><td>
+<img src="./ScreenShots/Screenshot (11).png" alt="A picture of the gallery to vote on." width="320" height="240"/>
+</td><td>
 
-<img src="./ScreenShots/Screenshot (07).png" alt="A generated image screen from the prompt." width="640" height="480"/>
-
-<img src="./ScreenShots/Screenshot (08).png" alt="A gallery screen, allowing you may vote." width="640" height="480"/>
-
-<img src="./ScreenShots/Screenshot (09).png" alt="A screenshot after of a voted on image." width="640" height="480"/>
-
-<img src="./ScreenShots/Screenshot (10).png" alt="A leaderboard with some images in it." width="640" height="480"/>
-
-<img src="./ScreenShots/Screenshot (11).png" alt="A picture of the gallery to vote on." width="640" height="480"/>
-
-
-
+</td></tr></table>
+</p>
+</center>
 
 An app written in VB6 and C++ for Windows 11 that runs as a legacy Kiosk and intends to be a coin operated Text-to-Image Arcade setup using Stable Diffusion Automatic1111 API (on localhost, without internet nor mouse).
 
