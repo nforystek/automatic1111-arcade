@@ -95,6 +95,11 @@ Single Image View Screen >------> Election Gallery Vote/Views >-----> -alt-key->
         credit in the game, the screens do not auto switch unless it's for new generate.
         While credits remain, all screens are available via navigation of the keyboard.
 	A feature it lacks right now, is the period to have it reset like US elections.
+	I think based on periodic use, depending on the election term, that will change
+	the voting periods to possibly reset votes or, keep the current, higher better.
+	The idea is for return customers, or even in some games, I never get to highest
+	score, and that could be very real for this in very cool generated images get on
+	the idle state leader board and cycle of to view.  Gallery is only if you credit.
 
 ####################################################################################################
 ####################################################################################################
