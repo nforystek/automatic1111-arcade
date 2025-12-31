@@ -1,44 +1,43 @@
 # automatic1111-arcade
 <p align=middle>
 <center>
+<table>
+
+<tr><td colspan=2>
 <img src="./sd-arcade.png" alt="Stable Diffusion Automatic1111 Arcade" width="200"/>
+</td></tr>
 
-
-<table><tr><td>
+<tr><td>
 <img src="./ScreenShots/Screenshot (01).png" alt="The startup screen." width="320" height="240"/>
 </td><td>
 <img src="./ScreenShots/Screenshot (02).png" alt="Main periodic ad screen." width="320" height="240"/>
-</td></tr></table>
+</td></tr>
 
-<table><tr><td>
+<tr><td>
 <img src="./ScreenShots/Screenshot (03).png" alt="An empty leaderboard screen." width="320" height="240"/>
 </td><td>
 <img src="./ScreenShots/Screenshot (04).png" alt="A blank prompt screen." width="320" height="240"/>
-</td></tr></table>
+</td></tr>
 
-<table><tr><td>
+<tr><td>
 <img src="./ScreenShots/Screenshot (05).png" alt="No images generated screen." width="320" height="240"/>
 </td><td>
 <img src="./ScreenShots/Screenshot (06).png" alt="A prompt screen with a prompt entry." width="320" height="240"/>
-</td></tr></table>
+</td></tr>
 
-<table><tr><td>
+<tr><td>
 <img src="./ScreenShots/Screenshot (07).png" alt="A generated image screen from the prompt." width="320" height="240"/>
 </td><td>
-<img src="./ScreenShots/Screenshot (08).png" alt="A gallery screen, allowing you may vote." width="320" height="240"/>
-</td></tr></table>
+<img src="./ScreenShots/Screenshot (11).png" alt="A gallery screen, allowing you may vote." width="320" height="240"/>
+</td></tr>
 
-<table><tr><td>
+<tr><td>
 <img src="./ScreenShots/Screenshot (09).png" alt="A screenshot after of a voted on image." width="320" height="240"/>
 </td><td>
 <img src="./ScreenShots/Screenshot (10).png" alt="A leaderboard with some images in it." width="320" height="240"/>
-</td></tr></table>
+</td></tr>
 
-<table><tr><td>
-<img src="./ScreenShots/Screenshot (11).png" alt="A picture of the gallery to vote on." width="320" height="240"/>
-</td><td>
-
-</td></tr></table>
+</table>
 </p>
 </center>
 
@@ -101,7 +100,7 @@ Single Image View Screen >------> Election Gallery Vote/Views >-----> -alt-key->
 ####################################################################################################
 ```
 
-Incomplete list of products (missing the monitor and speakers, which it appears much of the customization can come from the cabinet maker) for a keyboarded kiosk (I'll ensure the software can handle fully touch screen navigation, as of now it uses the keyboard and not all keys required double as buttons, only text).
+Incomplete list of products (missing the monitor and speakers, which it appears much of the customization can come from the cabinet maker) for a keyboarded kiosk (all the buttons for navigation, every least the prompt entry, are touch enabled, or have buttons relating to the key shortcuts).
 
 
 [LVL23C 54" Tall 2 Player Cabaret Arcade Cabinet Kit](https://www.amazon.com/LVL23C-Player-Cabaret-Cabinet-buttons/dp/B0CJ5ZSZRM/?_encoding=UTF8&pd_rd_w=pCyV7&content-id=amzn1.sym.4efc43db-939e-4a80-abaf-50c6a6b8c631%3Aamzn1.symc.5a16118f-86f0-44cd-8e3e-6c5f82df43d0&pf_rd_p=4efc43db-939e-4a80-abaf-50c6a6b8c631&pf_rd_r=4XQ3WPWS0WVDDBYB5GNH&pd_rd_wg=Gax4g&pd_rd_r=26d6c64d-efc4-4ba3-af94-98fbe466fe34&ref_=pd_hp_d_atf_ci_mcx_mr_ca_hp_atf_d)

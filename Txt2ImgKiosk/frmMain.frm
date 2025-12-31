@@ -53,7 +53,7 @@ Begin VB.Form frmMain
       Left            =   360
       ScaleHeight     =   1920
       ScaleWidth      =   2865
-      TabIndex        =   16
+      TabIndex        =   14
       Top             =   5880
       Visible         =   0   'False
       Width           =   2865
@@ -84,7 +84,7 @@ Begin VB.Form frmMain
       Left            =   5040
       ScaleHeight     =   4875
       ScaleWidth      =   4725
-      TabIndex        =   15
+      TabIndex        =   13
       Top             =   1440
       Visible         =   0   'False
       Width           =   4725
@@ -217,7 +217,7 @@ Begin VB.Form frmMain
          ForeColor       =   &H00FFFFFF&
          Height          =   1515
          Left            =   240
-         TabIndex        =   17
+         TabIndex        =   15
          Top             =   180
          Width           =   4185
       End
@@ -381,16 +381,33 @@ Begin VB.Form frmMain
          EndProperty
          ForeColor       =   &H80000008&
          Height          =   945
-         Left            =   1680
+         Left            =   720
          ScaleHeight     =   945
-         ScaleWidth      =   8520
-         TabIndex        =   13
-         Top             =   2520
-         Width           =   8520
+         ScaleWidth      =   10545
+         TabIndex        =   16
+         Top             =   2640
+         Width           =   10545
+         Begin VB.CommandButton Command5 
+            Caption         =   "View (F1)"
+            Height          =   735
+            Index           =   0
+            Left            =   8400
+            TabIndex        =   17
+            Top             =   120
+            Width           =   1935
+         End
+         Begin VB.Image Image2 
+            Height          =   720
+            Index           =   0
+            Left            =   240
+            Stretch         =   -1  'True
+            Top             =   105
+            Width           =   735
+         End
          Begin VB.Label Label3 
             Alignment       =   2  'Center
             BackColor       =   &H00FFFFFF&
-            Caption         =   "1st Place With # VOTES (F1)"
+            Caption         =   "1st Place With # VOTES"
             BeginProperty Font 
                Name            =   "Arial"
                Size            =   18
@@ -403,17 +420,9 @@ Begin VB.Form frmMain
             Height          =   480
             Index           =   0
             Left            =   1290
-            TabIndex        =   14
+            TabIndex        =   18
             Top             =   225
             Width           =   7020
-         End
-         Begin VB.Image Image2 
-            Height          =   720
-            Index           =   0
-            Left            =   240
-            Stretch         =   -1  'True
-            Top             =   105
-            Width           =   735
          End
       End
       Begin VB.Image Image4 
@@ -580,17 +589,9 @@ Private Function KeyHandler(KeyCode As Integer, Shift As Integer) As Boolean
             Case 39 'RIGHT
                 If OnTab = TAB_VOTEONIMAGE Then MoveImageRight
                 
-            Case 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123 'F2
-                If (KeyCode - 111) <= TopNumberOf Then
-                    ShowTab TAB_VIEWIMAGE
-                    ViewWinner (KeyCode - 111)
-                    
-                    If Timer1.Enabled Then
-                        Timer1.Enabled = False
-                        Timer1.Interval = TIMER_NOCREDITS
-                        Timer1.Enabled = True
-                    End If
-                End If
+            Case 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123 'F1-F12
+                ViewTopChats (KeyCode - 111)
+                
         #If USECOIN = 0 Then
             Case 45 'INSERT
                 CoinIn
@@ -900,6 +901,19 @@ Private Sub SetAllFonts()
         Next
     End If
 End Sub
+
+Private Sub Command5_Click(Index As Integer)
+    ViewTopChats (Index + 1)
+End Sub
+
+Private Sub Command5_GotFocus(Index As Integer)
+    CommandFocus
+End Sub
+
+Private Sub Command5_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+    KeyHandler KeyCode, Shift
+End Sub
+
 Private Sub Form_Initialize()
     
     On Error Resume Next
@@ -1193,6 +1207,20 @@ Private Sub VoteOnImage()
         Timer1.Enabled = False
         Timer1.Interval = TIMER_TEMPINFO
         Timer1.Enabled = True
+    End If
+End Sub
+
+Private Sub ViewTopChats(ByVal Place As Long)
+    If Place <= TopNumberOf Then
+
+        ShowTab TAB_VIEWIMAGE
+        ViewWinner Place
+        
+        If Timer1.Enabled Then
+            Timer1.Enabled = False
+            Timer1.Interval = TIMER_NOCREDITS
+            Timer1.Enabled = True
+        End If
     End If
 End Sub
 
@@ -1614,8 +1642,13 @@ Private Sub ViewWinner(Optional ByVal Place As Long = -1)
         For tmp = Label3.LBound + 1 To Label3.UBound
             Unload Label3(tmp)
         Next
+        For tmp = Command5.LBound + 1 To Command5.UBound
+            Unload Command5(tmp)
+        Next
         Picture2.Height = ((Image2(0).Top * 2) + Image2(0).Height)
         Label3(0).Top = (Image2(0).Top + (Image2(0).Height / 2)) - (Label3(0).Height / 2)
+        Command5(0).Top = Image2(0).Top
+        
         
     End If
 
@@ -1634,27 +1667,33 @@ Private Sub ViewWinner(Optional ByVal Place As Long = -1)
     
     If Place = -1 Then
         If tmp > 0 Then
+            Command5(0).Enabled = True
             Image2(Image2.UBound).Visible = True
             Label3(Label3.UBound).Visible = True
+            Command5(Command5.UBound).Visible = True
                 
             Picture2.Height = ((Image2(0).Top * 2) + Image2(0).Height)
             
             Do Until tmp = 1
                 Load Image2(Image2.UBound + 1)
                 Load Label3(Label3.UBound + 1)
+                Load Command5(Command5.UBound + 1)
                 tmp = tmp - 1
                 Picture2.Height = Picture2.Height + (Image2(0).Top + Image2(0).Height)
                 Image2(Image2.UBound).Top = (Image2(Image2.UBound - 1).Top + Image2(Image2.UBound - 1).Height) + Image2(0).Top
                 Label3(Image2.UBound).Top = (Image2(Image2.UBound).Top + (Image2(Image2.UBound).Height / 2)) - (Label3(Image2.UBound).Height / 2)
+                Command5(Command5.UBound).Top = Image2(Image2.UBound).Top
                 Image2(Image2.UBound).Visible = True
                 Label3(Label3.UBound).Visible = True
-
+                Command5(Command5.UBound).Visible = True
+                Command5(Command5.UBound).Enabled = True
             Loop
             
             Form_Resize
         Else
             Set Image2(0).Picture = LoadPicture("")
             Label3(0).Caption = "No image votes yet!"
+            Command5(0).Enabled = False
         End If
    End If
 
@@ -1673,6 +1712,7 @@ Private Sub ViewWinner(Optional ByVal Place As Long = -1)
             Select Case tmp
                 Case 1
                     Label3(tmp - 1).Caption = "1st place with " & votes & " votes (F1)"
+                    
                 Case 2
                     Label3(tmp - 1).Caption = "2nd place with " & votes & " votes (F2)"
                 Case 3
@@ -1681,6 +1721,7 @@ Private Sub ViewWinner(Optional ByVal Place As Long = -1)
                     Label3(tmp - 1).Caption = Trim(CStr(tmp)) & "th place with " & votes & " votes (F" & Trim(CStr(tmp)) & ")"
             End Select
             
+            Command5(tmp - 1).Caption = "View (F" & Trim(CStr(tmp)) & ")"
             Set pic = PictureFromByteStream(b)
             Set Image2(tmp - 1).Picture = pic
         End If
