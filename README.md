@@ -105,7 +105,8 @@ Single Image View Screen >------> Election Gallery Vote/Views >-----> -alt-key->
 	less than a vote a day for two weeks, maybe the all time high score type of play
 	is implemented, and it checks every two weeks, if 14 votes happened, then each
 	term of two weeks should reset all the votes, and, zero votes should not show up.
-	Currently it is allowing zero votes to show up as many as would be fill top 12.
+	Currently it is allowing zero votes to show up as many as would be fill top 12.	
+	Then, if less that 14 votes (one a day) for the two weeks, then skip reset votes.	
 
 ####################################################################################################
 ####################################################################################################
