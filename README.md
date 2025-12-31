@@ -100,6 +100,12 @@ Single Image View Screen >------> Election Gallery Vote/Views >-----> -alt-key->
 	The idea is for return customers, or even in some games, I never get to highest
 	score, and that could be very real for this in very cool generated images get on
 	the idle state leader board and cycle of to view.  Gallery is only if you credit.
+	That way, continued return customers can have most say in the top leader board.
+	Or honestly, those who want the win would multiple vote anyway, but if there is
+	less than a vote a day for two weeks, maybe the all time high score type of play
+	is implemented, and it checks every two weeks, if 14 votes happened, then each
+	term of two weeks should reset all the votes, and, zero votes should not show up.
+	Currently it is allowing zero votes to show up as many as would be fill top 12.
 
 ####################################################################################################
 ####################################################################################################
