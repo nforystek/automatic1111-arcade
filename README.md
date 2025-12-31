@@ -94,6 +94,7 @@ Single Image View Screen >------> Election Gallery Vote/Views >-----> -alt-key->
         screens will begin to auto switch if the keyboard remains idle.  When there is
         credit in the game, the screens do not auto switch unless it's for new generate.
         While credits remain, all screens are available via navigation of the keyboard.
+	A feature it lacks right now, is the period to have it reset like US elections.
 
 ####################################################################################################
 ####################################################################################################
