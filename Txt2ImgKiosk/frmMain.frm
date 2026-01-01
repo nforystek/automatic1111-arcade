@@ -6,7 +6,7 @@ Begin VB.Form frmMain
    ClientHeight    =   10095
    ClientLeft      =   -45
    ClientTop       =   -105
-   ClientWidth     =   16155
+   ClientWidth     =   24060
    ClipControls    =   0   'False
    ControlBox      =   0   'False
    BeginProperty Font 
@@ -25,7 +25,7 @@ Begin VB.Form frmMain
    MousePointer    =   2  'Cross
    Moveable        =   0   'False
    ScaleHeight     =   10095
-   ScaleWidth      =   16155
+   ScaleWidth      =   24060
    StartUpPosition =   2  'CenterScreen
    Visible         =   0   'False
    WindowState     =   2  'Maximized
@@ -365,7 +365,7 @@ Begin VB.Form frmMain
       TabIndex        =   7
       Top             =   1440
       Visible         =   0   'False
-      Width           =   4980
+      Width           =   12660
       Begin VB.PictureBox Picture2 
          Appearance      =   0  'Flat
          BackColor       =   &H00FFFFFF&
@@ -424,6 +424,16 @@ Begin VB.Form frmMain
             Top             =   225
             Width           =   7020
          End
+      End
+      Begin VB.Label Label5 
+         Alignment       =   2  'Center
+         BackStyle       =   0  'Transparent
+         ForeColor       =   &H00C0C0C0&
+         Height          =   615
+         Left            =   960
+         TabIndex        =   19
+         Top             =   1920
+         Width           =   10335
       End
       Begin VB.Image Image4 
          Height          =   2250
@@ -521,8 +531,8 @@ Private Credit As Integer
 Private ImgCount As Long
 
 'textbox constants
-Private Const Text1GreyText = "(Enter your idea in text here, to generate into an image)"
-Private Const Text2GreyText = "(Optionally, enter ideas you don't want in the iamge here)"
+Private Const Text1GreyText = "(Enter your idea in text here to generate it into an image)"
+Private Const Text2GreyText = "(Optionally, enter ideas you don't want in the image here)"
 
 'for when sending to the python script
 Private Const ImageHeight = 512
@@ -554,6 +564,18 @@ Private Sub SetCaption(ByRef ctrl As Control, ByVal Cap As String)
     If ctrl.Caption <> Cap Then ctrl.Caption = Cap
 End Sub
 
+Private Sub SetTop(ByRef ctrl As Control, ByVal Val As Single)
+    If ctrl.Top <> Val Then ctrl.Top = Val
+End Sub
+Private Sub SetLeft(ByRef ctrl As Control, ByVal Val As Single)
+    If ctrl.Left <> Val Then ctrl.Left = Val
+End Sub
+Private Sub SetWidth(ByRef ctrl As Control, ByVal Val As Single)
+    If ctrl.Width <> Val Then ctrl.Width = Val
+End Sub
+Private Sub SetHeight(ByRef ctrl As Control, ByVal Val As Single)
+    If ctrl.Height <> Val Then ctrl.Height = Val
+End Sub
 'all control (buttons etc...) is bipassed to this function, there is no mouse
 Private Function KeyHandler(KeyCode As Integer, Shift As Integer) As Boolean
 
@@ -648,7 +670,7 @@ Public Sub ShowTab(ByVal cIndex As Integer)
     
     SetVisible Picture3, (OnTab = TAB_NOCREDIT)
     
-    
+    SetVisible Label5, (OnTab = TAB_LEADERBOARD)
     SetVisible Frame3, (OnTab = TAB_LEADERBOARD)
     
     SetVisible Frame1, (OnTab = TAB_GENERATE)
@@ -1033,6 +1055,9 @@ Private Sub Form_Resize()
     
     Picture2.Left = (Frame3.Width / 2) - (Picture2.Width / 2)
     Picture2.Top = ((Frame3.Height / 2) + (Image4.Height / 2)) - (Picture2.Height / 2)
+    Label5.Top = Picture2.Top - Label5.Height
+    Label5.Left = Picture2.Left
+    Label5.Width = Picture2.Width
     
     Frame1.Height = ((Frame3.Height - Command1.Height) / 2)
     Frame2.Height = Frame1.Height
@@ -1200,6 +1225,8 @@ Private Sub VoteOnImage()
                 Timer1.Interval = TIMER_TEMPINFO
                 Label2.Caption = "You've added 1 vote for this image!"
                 Timer1.Enabled = True
+                
+                IncrementVotedCount
             End If
         End If
     ElseIf Credit = 0 Then 'show a red error
@@ -1399,6 +1426,8 @@ Private Sub oImager_DataReceived(ByVal sData As String)
             
             bExecute2 = False
             
+            SetVisible Label4, True
+            
             Dim X As Single
             Dim Y As Single
             Dim C As Boolean
@@ -1415,7 +1444,6 @@ Private Sub oImager_DataReceived(ByVal sData As String)
             If Not C Then
                 FileRemove ID
                 Credit = Credit + CREDIT_TOGENERATE
-                SetVisible Label4, True
             Else
                 SetVisible Label4, False
             End If
@@ -1634,6 +1662,7 @@ Private Sub ViewWinner(Optional ByVal Place As Long = -1)
     
     Dim pic As StdPicture
     Dim b() As Byte
+    SetVisible Label4, False
     
     If Place = -1 Then
         For tmp = Image2.LBound + 1 To Image2.UBound
@@ -1659,6 +1688,7 @@ Private Sub ViewWinner(Optional ByVal Place As Long = -1)
         Do Until tmp = TopNumberOf Or rsFile.EOF
             tmp = tmp + 1
             ids = ids & rsFile("ID") & ","
+            'Image2(tmp - 1).Tag = rsFile("ID")
             ImgCount = ImgCount + 1
             rsFile.MoveNext
         Loop
@@ -1667,7 +1697,6 @@ Private Sub ViewWinner(Optional ByVal Place As Long = -1)
     
     If Place = -1 Then
         If tmp > 0 Then
-            Command5(0).Enabled = True
             Image2(Image2.UBound).Visible = True
             Label3(Label3.UBound).Visible = True
             Command5(Command5.UBound).Visible = True
@@ -1686,14 +1715,13 @@ Private Sub ViewWinner(Optional ByVal Place As Long = -1)
                 Image2(Image2.UBound).Visible = True
                 Label3(Label3.UBound).Visible = True
                 Command5(Command5.UBound).Visible = True
-                Command5(Command5.UBound).Enabled = True
             Loop
             
             Form_Resize
         Else
             Set Image2(0).Picture = LoadPicture("")
-            Label3(0).Caption = "No image votes yet!"
-            Command5(0).Enabled = False
+            SetCaption Label3(0), "No image votes yet!"
+            Command5(0).Visible = False
         End If
    End If
 
@@ -1705,20 +1733,20 @@ Private Sub ViewWinner(Optional ByVal Place As Long = -1)
             FileGetArray NextArg(ids, ","), b, votes
             Set pic = PictureFromByteStream(b)
             Set Image1.Picture = pic
-            Label1.Caption = "Number " & Place & " in the poles with " & votes & " votes."
+            SetCaption Label1, "Number " & Place & " in the poles with " & votes & " votes."
         ElseIf Place = -1 Then
             FileGetArray NextArg(ids, ","), b, votes
             
             Select Case tmp
                 Case 1
-                    Label3(tmp - 1).Caption = "1st place with " & votes & " votes (F1)"
+                    SetCaption Label3(tmp - 1), "1st place with " & votes & " votes (F1)"
                     
                 Case 2
-                    Label3(tmp - 1).Caption = "2nd place with " & votes & " votes (F2)"
+                    SetCaption Label3(tmp - 1), "2nd place with " & votes & " votes (F2)"
                 Case 3
-                    Label3(tmp - 1).Caption = "3rd place with " & votes & " votes (F3)"
+                    SetCaption Label3(tmp - 1), "3rd place with " & votes & " votes (F3)"
                 Case Else
-                    Label3(tmp - 1).Caption = Trim(CStr(tmp)) & "th place with " & votes & " votes (F" & Trim(CStr(tmp)) & ")"
+                    SetCaption Label3(tmp - 1), Trim(CStr(tmp)) & "th place with " & votes & " votes (F" & Trim(CStr(tmp)) & ")"
             End Select
             
             Command5(tmp - 1).Caption = "View (F" & Trim(CStr(tmp)) & ")"
@@ -1767,7 +1795,7 @@ Private Sub Timer1_Timer()
             End Select
         End If
         
-        Label2.Caption = "Left Arrow (BACK)     Right Arrow (NEXT)"
+        SetCaption Label2, "Left Arrow (BACK)     Right Arrow (NEXT)"
         
         Select Case OnTab
             Case TAB_GENERATE
@@ -1776,14 +1804,92 @@ Private Sub Timer1_Timer()
                 Command4.BackColor = &H8000000F
         End Select
 
-
         If RandomPositive(1, 5) = 1 Then
             If Ambient.Count > 0 Then
                 Ambient(RandomPositive(1, Ambient.Count)).PlaySound
             End If
         End If
+
+        DetermineVotingTerms
+        
     End If
     
+End Sub
+
+Private Sub IncrementVotedCount()
+    PeriodicVotes = PeriodicVotes + 1
+    SaveSettings
+End Sub
+
+
+Private Sub DetermineVotingTerms()
+    If Not IsDate(VotingTerm) Then VotingTerm = Now 'if not set, start at no term
+
+
+    Dim DD As Long
+    DD = DateDiff("d", VotingTerm, Now)
+    'the difference below or above 0
+    'will determine no term or term
+        
+    If Label5.Caption = "" Then UpdateTermStatement DD
+        
+    If Not (Year(VotingTerm) = Year(Now) And Day(VotingTerm) = Day(Now) And Month(VotingTerm) = Month(Now)) Then
+    'avoid zero date difference
+      
+    
+        If (DD < 0) Then 'in no term
+        
+            If (-DD > VotePeriod) Then 'if the term is up
+                'when the period to check usage passes
+            
+                If (PeriodicVotes >= ResetVotes) Then 'usage
+                    'enough activity to switch to term based
+                    VotingTerm = DateAdd("d", VotingTerm, Now)
+                    dbQuery "UPDATE Files SET FileVote=0;"
+                Else
+                    'stay no term, not much activity, reset date
+                    VotingTerm = DateAdd("d", -VotingTerm, Now)
+                End If
+
+                UpdateTermStatement DD
+    
+                PeriodicVotes = 0 'reset vote counter
+                SaveSettings
+                
+            End If
+    
+        ElseIf (DD > 0) Then 'in term
+        
+            If (DD > VotePeriod) Then 'if the term is up
+                'when the period to check usage passes
+            
+                If PeriodicVotes < ResetVotes Then 'usage
+                    'not much activity, switch to no term
+                    VotingTerm = DateAdd("d", -VotingTerm, Now)
+                Else
+                    'stay term, not much activity, reset date
+                    VotingTerm = DateAdd("d", VotingTerm, Now)
+                    dbQuery "UPDATE Files SET FileVote=0;"
+                End If
+                UpdateTermStatement DD
+        
+                PeriodicVotes = 0 'reset vote counter
+                SaveSettings
+                
+            End If
+        
+        End If
+    End If
+    
+    
+End Sub
+
+Private Sub UpdateTermStatement(ByVal DD As Long)
+    If DD <= 0 Then
+        SetCaption Label5, "The current pole election has no time period."
+    ElseIf DD > 0 Then
+        SetCaption Label5, "The current pole election term ends on " & VotingTerm
+    End If
 End Sub
 
 'important timer

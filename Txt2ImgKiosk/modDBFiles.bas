@@ -2,9 +2,6 @@ Attribute VB_Name = "modDBFiles"
 #Const modFiles = -1
 Option Explicit
 
-Public Const TopNumberOf = 12  'what number to make the top 10 so to speak, or top 5, anything from 1 to 12
-Public Const TotalImages = 50  'as much as you want the scroll for voting to be in held image cache
-
 Public rsFile As New ADODB.Recordset
 
 Public Sub FileGetTopVotes()

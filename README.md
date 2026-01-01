@@ -4,7 +4,7 @@
 <table>
 
 <tr><td colspan=2>
-<img src="./sd-arcade.png" alt="Stable Diffusion Automatic1111 Arcade" width="200"/>
+<img src="./sd-arcade.png" alt="Stable Diffusion Automatic1111 Arcade (digital mock)" width="200"/>
 </td></tr>
 
 <tr><td>
@@ -16,19 +16,19 @@
 <tr><td>
 <img src="./ScreenShots/Screenshot (03).png" alt="An empty leaderboard screen." width="320" height="240"/>
 </td><td>
-<img src="./ScreenShots/Screenshot (04).png" alt="A blank prompt screen." width="320" height="240"/>
+<img src="./ScreenShots/Screenshot (04).png" alt="No images generated screen." width="320" height="240"/>
 </td></tr>
 
 <tr><td>
-<img src="./ScreenShots/Screenshot (05).png" alt="No images generated screen." width="320" height="240"/>
+<img src="./ScreenShots/Screenshot (05).png" alt="A blank prompt screen." width="320" height="240"/>
 </td><td>
-<img src="./ScreenShots/Screenshot (06).png" alt="A prompt screen with a prompt entry." width="320" height="240"/>
+<img src="./ScreenShots/Screenshot (06).png" alt="A prompt screen with text entered." width="320" height="240"/>
 </td></tr>
 
 <tr><td>
 <img src="./ScreenShots/Screenshot (07).png" alt="A generated image screen from the prompt." width="320" height="240"/>
 </td><td>
-<img src="./ScreenShots/Screenshot (11).png" alt="A gallery screen, allowing you may vote." width="320" height="240"/>
+<img src="./ScreenShots/Screenshot (08).png" alt="A gallery screen, allowing you may vote." width="320" height="240"/>
 </td></tr>
 
 <tr><td>
@@ -45,7 +45,7 @@ Preface:
 
 An app written in VB6 and C++ for Windows 11 that runs as a legacy Kiosk and intends to be a coin operated Text-to-Image Arcade setup using Stable Diffusion Automatic1111 API (on localhost, without internet nor mouse).
 
-Users put in 0.25 cents and get 3 credits.  Each image generated costs 2 credits, and to vote on any one generated image to be in the top 12 is 1 credit.
+Users put in 0.25 cents and get 3 credits.  Each image generated costs 2 credits, and to vote on any one generated image to be in the top voted on list by votes is 1 credit.  Appropriately the font and generating image sound is Transformers(R).  Idle it makes more casino type of sounds periodically, and there is a coin drop 
 
 The following Automatic1111 extensions are involved/supported:
 
@@ -92,21 +92,16 @@ Single Image View Screen >------> Election Gallery Vote/Views >-----> -alt-key->
         the advertisement screen, leader board screen, and F1 to F12 keys can be used to
         see what image is in 1st to 12th place respectively to the F key pressed. These
         screens will begin to auto switch if the keyboard remains idle.  When there is
-        credit in the game, the screens do not auto switch unless it's for new generate.
+        credit in the game, the screens do not auto switch unless it's done generating.
         While credits remain, all screens are available via navigation of the keyboard.
-	A feature it lacks right now, is the period to have it reset like US elections.
-	I think based on periodic use, depending on the election term, that will change
-	the voting periods to possibly reset votes or, keep the current, higher better.
-	The idea is for return customers, or even in some games, I never get to highest
-	score, and that could be very real for this in very cool generated images get on
-	the idle state leader board and cycle of to view.  Gallery is only if you credit.
-	That way, continued return customers can have most say in the top leader board.
-	Or honestly, those who want the win would multiple vote anyway, but if there is
-	less than a vote a day for two weeks, maybe the all time high score type of play
-	is implemented, and it checks every two weeks, if 14 votes happened, then each
-	term of two weeks should reset all the votes, and, zero votes should not show up.
-	Currently it is allowing zero votes to show up as many as would be fill top 12.	
-	Then, if less that 14 votes (one a day) for the two weeks, then skip reset votes.	
+	There is two modes of election periods, one is no term, and votes are based on
+	all time accumulating, but they reset if the machine goes to term elections and
+	the term amount is set in the code via constants documented, the auto switching
+	is based on usage that can also be set with the term threshold, for instance if
+	the usage is lesser then more, the no term will be enabled, when many uses occur
+	for high traffic arcades, the term stays defined by days passing, resetting votes.
+	Note, a resource file exists mapped out in directories so you can delete mine for
+	your own conscious and build it yourself, a plus is it consists of custom sound FX.
 
 ####################################################################################################
 ####################################################################################################

@@ -44,6 +44,23 @@ Option Explicit
 '
 '##########################################################
 
+Public Const VotePeriod = 1 '28 'this is what a election period will be in days before votes reset, if in period vote mode
+Public Const ResetVotes = 2 '14 'during the period, if this many votes are not met, it will not reset votes on the period
+                            'and possibly change the terms of the election to be no term, or having a term of VotePeriod
+
+Public Const TopNumberOf = 3 '12  'what number to make the top 10 so to speak, or top 5, anything from 1 to 12
+Public Const TotalImages = 15 '50 'as much as you want the scroll for voting to be in held image cache and must
+'be above the TopNumberOf, theoretically significantly, these are not viewable unless you have credits in.
+
+
+Public VotingTerm As String 'if this value is before the current date, then we are in no timeline term voting, else term voting
+Public PeriodicVotes As Long 'determined by the voting term from the above variable, when in term voting, this is how many votes
+                            'are seen so far in the term, if we are in no term voting, this is how many votes have occured in
+                            'the current virtual voting term, that if met, will change the no term voting to term voting. in
+                            'term voting, when the term timeline is met and votes are enough it remains term voting then the
+                            'votes of every picture are reset to zero, in no term voting the votes don't get reset, as scores.
+
+
 Public LastError As String
 Public WebUIURL As String
 Public SDPath As String

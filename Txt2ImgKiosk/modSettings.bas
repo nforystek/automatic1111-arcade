@@ -30,11 +30,8 @@ Public Function LoadSettings() As Boolean
     
     If rs.EOF Then
             
-'        SetSetting "WinTop", CStr((Screen.Height / 2) - (5940 / 2))
-'        SetSetting "WinLeft", CStr((Screen.Width / 2) - (8265 / 2))
-'        SetSetting "WinWidth", "9270"
-'        SetSetting "WinHeight", "7275"
-'        SetSetting "WinState", "0"
+        SetSetting "VotingTerm", VotingTerm
+        SetSetting "PeriodicVotes", PeriodicVotes
 
         SetSetting "Version", App.Major & "." & App.Minor & "." & App.Revision
 
