@@ -3,7 +3,7 @@
 <center>
 <table>
 
-<tr><td colspan=2 align=center><center>
+<tr><td colspan=2 align=middle><center>
 <img src="./sd-arcade.png" alt="Stable Diffusion Automatic1111 Arcade (digital mock)" width="200"/>
 </center>
 </td></tr>
@@ -45,7 +45,7 @@
 
 Preface:
 
-An app written in VB6 and C++ for Windows 11 that runs as a legacy Kiosk and intends to be a coin operated Text-to-Image Arcade setup using Stable Diffusion Automatic1111 API (on localhost, without internet nor mouse).
+A legacy Kiosk and intends to be a coin operated Text-to-Image Arcade setup using Stable Diffusion Automatic1111 API (on localhost, without internet nor mouse).
 
 Users put in 0.25 cents and get 3 credits.  Each image generated costs 2 credits, and to vote on any one generated image to be in the top voted on list by votes is 1 credit.  Appropriately the font and generating image sound is Transformers(R).  Idle it makes more casino type of sounds periodically, and there is a coin drop 
 
@@ -111,16 +111,22 @@ Incomplete list of products (missing the monitor and speakers, which it appears 
 
 [LVL23C 54" Tall 2 Player Cabaret Arcade Cabinet Kit](https://www.amazon.com/LVL23C-Player-Cabaret-Cabinet-buttons/dp/B0CJ5ZSZRM/?_encoding=UTF8&pd_rd_w=pCyV7&content-id=amzn1.sym.4efc43db-939e-4a80-abaf-50c6a6b8c631%3Aamzn1.symc.5a16118f-86f0-44cd-8e3e-6c5f82df43d0&pf_rd_p=4efc43db-939e-4a80-abaf-50c6a6b8c631&pf_rd_r=4XQ3WPWS0WVDDBYB5GNH&pd_rd_wg=Gax4g&pd_rd_r=26d6c64d-efc4-4ba3-af94-98fbe466fe34&ref_=pd_hp_d_atf_ci_mcx_mr_ca_hp_atf_d)
 
-
 [Dell XPS 8960 Desktop - 14th Generation Intel Core i9-14900K Processor, 32GB DDR5 RAM, 2TB SSD, NVIDIA GeForce RTX 4070 12GB GDDR6X Graphics, Windows 11 Pro, Onsite & Migrate Service - Platinum Silver](https://www.amazon.com/Dell-XPS-8960-Desktop-Generation/dp/B0CYT9K6PD/ref=sr_1_15?dib=eyJ2IjoiMSJ9.aZK-Mrzvwu_x1-xOn5CnfaOA8jiDXa3VCN_uqzV28gyBMXzot966hQQIHvrqmYEoCmsCt-ahzZZN9_U1CHoyw38GY8twYLeyNmOvv7nBFhXF8qkh7OEfMSaJ2AT6C9THebuu5QBkUCm3ZK8vNkU-bmplFZxT0-5W_B5uB5BrAuzD0of7hMJVfRiDzVvhumIf4G9eVVRPYhFYLk7Q-TxyGJ24XXY39FOhsY4R_AJ1vKO3pLQRpPTIuwepM2sWuI_YsBXGyB-I6E-ZcmErImguNFUNOP4fDJLucvLQtUwwLq8.VHXg_Qk3nSvaMNHncMixTha9fwNmx8fge-zt5U6jjqg&dib_tag=se&keywords=xps%2B8960%2Bnvidia%2Brtx%2B4060&qid=1767194150&s=electronics&sr=1-15&th=1)
-
 
 [High-Speed Parallel Port PCI Express Printer I/O Card](https://www.amazon.com/dp/B0BJ7NC3D4?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_1)
 
-
-[VHV Arcade Coin Door V2 Sticker Vinyl Waterproof Sticker Decal Car Laptop Wall Window Bumper Sticker 5inch VHV-CRYPTO-STICKERS-4620](https://www.amazon.com/VHV-Arcade-Sticker-Waterproof-VHV-CRYPTO-STICKERS-4620/dp/B09KDJ4JFY/ref=sr_1_19?dib=eyJ2IjoiMSJ9.Ic1BWKBzYipmzDsms9kiE9LmAMVm81Xw-j_1iKG81pYG-8W2RSYbqYQAe22Jg6etQ05yLyc0a6403fSVoCaAhVDvqPAXYQj8GT3XYSjoN51yOv31f-icFNP7QvJoJaQ0htRcqUklCz2vje9HSlqX7KPxx5JPOQw5MqK6VbasSpXJRYHyXoNuQaGRpBh9gu25q1VGp8pHtLBI1ZseA1qgRph4S8xZCWx4uyrnydoZ85aH7cSdeckB2TT_vUCwAz9bezs10qUrL1WFhE5E1IMSRyLcb1fZgCRr5XMG7FdceXs.Ew4JbiSs3pD8fvX8j7Zi0AsKT7cZxnZP842NVM3LAa4&dib_tag=se&keywords=arcade+coin+box&qid=1767194400&sr=8-19)
-
-
-[New Wave Toys RepliTronics Arcade Change Machine USB-C x2 and USB-A x4 Charging Station, Retro Desktop Office Hub for Multiple Devices, Classic Wood Panel](https://www.amazon.com/dp/B085FXGH38/ref=sspa_dk_detail_5?psc=1&pd_rd_i=B085FXGH38&pd_rd_w=Bvew4&content-id=amzn1.sym.953c7d66-4120-4d22-a777-f19dbfa69309&pf_rd_p=953c7d66-4120-4d22-a777-f19dbfa69309&pf_rd_r=P2M78K3QWKWNQ3S9PJAS&pd_rd_wg=CMiAN&pd_rd_r=268ed41c-6131-478e-8c40-374f519bfdc7&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWwy)
+[RS232 Parallel Serial Port 2 Rows DB25 25 Pin D Sub Male/Female Connector + Plastic Assemble Shell Cover VAG Adapter, Pack of 10](https://www.amazon.com/dp/B07FS6VSVR?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_2)
 
 
+[20 Gauge 2 Conductor PVC Tinned Copper Electrical Wires, 32.8FT/10M Red and Black Double Parallel Wire,0.5mm²，for DIY Projects, Home Electrical, Power Wiring,Car Speaker Wires, LED Wires.](https://www.amazon.com/Conductor-Electrical-Parallel-0-5mm%C2%B2%EF%BC%8C-Projects/dp/B0FH4ZWCJ2/ref=sr_1_2_sspa?crid=KCV51U4F9I8J&dib=eyJ2IjoiMSJ9.4gMNwI72qTHHlRhswEaJr7-UcHK6EtxlD0fHQx0tJs17BKJMEC6CNDA2YXF3Io8l99fRQvhkZ6ONuOmd9sZxpQBD-Ur94KJ7uAaJ8f2Xb2gYFXWsp-BldAE6hF91b9fORsv5p8ekiuO6uVgWiMWmHsVOmSiaRnwyXYmZJMoKTtSd6z_K9bEN6hjWaxtQZnVqCE71gVcn8359lg8LCy5X4yd8pnNf-8n2NyRNzS2UAno.OZ8CWap5gnq3S2wqf9ZazwQgnD3OR4OVHteig6Mtnrs&dib_tag=se&keywords=speaker%2Bwire&qid=1767410925&sprefix=speaker%2Bwir%2Caps%2C241&sr=8-2-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1)
+
+
+[19 Inch Arcade Game LED Monitor, Jamma Monitor MAME and Cocktail Game cabinets](https://www.amazon.com/Arcade-Monitor-Cocktail-cabinets-industrial/dp/B004QJ6EN8/ref=sr_1_3?crid=3NDQA3RTK72JS&dib=eyJ2IjoiMSJ9.Q9Gs6t5QeF0BdNoTI075wBZpz5KMuwUiDSPR6gpuFlrrReLuFHaqHH5XQAG9fo-DS0XPl0nXVuvepDmKa8KSNxzL04IbvpJwyBjVBGBADmBjQ8K6y7Gc156da-aeXwyDgZ9ONAHLbEF9IG78Wy8eAETstjWCklQQ3gOl80FoGxZZc2TxwrrwMFYgJIdSgZmMbLJCGnxclLPcXclCDXVG1ImtGaAx9DVXNp9i7sE36oM.BZR2p1xvDw9VxkEildNBcJPF0Klhjov-9QxG47UT-5Y&dib_tag=se&keywords=19%22+Square+LCD+Monitor+for+arcade&qid=1767410232&sprefix=19+square+lcd+monitor+for+arcad%2Caps%2C180&sr=8-3)
+
+[Arcade Game Coin Door with 1 Mechanical Coin selector for US 25 Cent, Jamma, Mame and More!](https://www.amazon.com/Arcade-Game-mechanical-selector-Jamma/dp/B00F1YQJJ6/ref=sr_1_2?crid=26MO1ELFBDGD8&dib=eyJ2IjoiMSJ9.MuRB97Zip8KwCg33OF4KqdLmAMVm81Xw-j_1iKG81pabcOz6ZgBVhrJwZwa_6ynnpC8ICyl8Julx1QQyeMjQbg3dKYR-vzj_iX1-_nErOfIWsfoEk7lJi_T75_gKiBEPUCW6m6Zo1IN6t4xeY1vWCMEeQ_o0BUo3upDFKJGJehn1l_Yxh1UrPW4qxvycVFTd-0t_LlftvsiNJOd-QxSVot0nF_HRqCk0Ncqdz6NemXz29PZFtJGXZRqzcOMvRqNocHMB8dtSyfuLkTRllDAmhxLe_rj136jXvS3AFwCrWv0.g5sdLsYh9miX81uJZELdDx_Zc7LPCu1YVPe92tGoSu4&dib_tag=se&keywords=arcade+coin+box%2C+NC+or+NO+switch&qid=1767410395&sprefix=arcade+coin+box%2C+nc+or+no+switc%2Caps%2C187&sr=8-2)
+
+
+[Poyiccot 3.5mm Speaker Wire Adapter, 3.5mm 4 Pole Stereo TRRS Male Jack to AV 4 Screw Terminal Block Balun Connectors Cable 30cm](https://www.amazon.com/Poyiccot-Plated-4-Screw-Terminal-Connectors/dp/B07PQTKMM7/ref=sr_1_3?crid=17DJWD64293VS&dib=eyJ2IjoiMSJ9.x6u2IJ4-Z4m0wDQlI3OdTT4x-nPGA5ACBUVJzymK47E2AXusgpBiXQVd6DZPs3i1DtzWTrJFL36YtW9lIuf41g3-Ek80tEItOVqCMTdZs0TYQwksDeFLn8_Z3_zbtWtvSeyzihQat6OJGt5iOos7DDG0yg8HlL8qU3Cn6zfKzUCrlk5fUVhZdbdC-g8iqtI5vsdX-yUme_sI4pDPDhWqCX5iV-t49YQ21giYk-nYRRo.ilQ9TmQphYEBzEfZ22alAb7CLszjmJ2X8NaF3KW03Bs&dib_tag=se&keywords=4%22%2Bspeakers%2Bheadphone%2Bjack&qid=1767410690&sprefix=4%2Bspeakers%2Bheadphone%2B%2Caps%2C363&sr=8-3&th=1)
+
+
+[ProTechTrader 4 inch 8 ohm Loud Speaker - 10 w Max / 5 Watt Nominal Square Screw Mount Round Cone for Pinball Arcade Machines M.A.M.E. Video Games DIY Electronics Radios Computers](https://www.amazon.com/ProTechTrader-inch-100mm-Loud-Speaker/dp/B0G3D52FYG/ref=sr_1_1?crid=778HY874AUF1&dib=eyJ2IjoiMSJ9.7gNVbJqq24ak6NVSFZNXws_x94piktodNrrGvHIzL3ImkYpHaEFe4iCtuhmxUISLUv8TUJRGptQAYHRAH-qR3wjGGDvGBLoDr37xwr4WjXgiNTe-V0aCJlmxEGk7AN_XgKvvVUKBxAdlZs2aS78gVg1StAV9W-uZDN22Lr24495EwP2qtOppVqdKlPGBJwrS6ioyFKOw2sOyvcBJ7samzjPpfG2WSDAqEs88GIwwrVo._jIs90-LQK5vMf-e5FD3S0-KTMQnD13cF_ZCODn1J_0&dib_tag=se&keywords=4%22%2Bcomputer%2Bscrew%2Bspeakers&qid=1767410861&sprefix=4%2Bcomputer%2Bscrew%2Bspeakers%2Caps%2C209&sr=8-1&th=1)
