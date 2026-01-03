@@ -106,8 +106,7 @@ Single Image View Screen >------> Election Gallery Vote/Views >-----> -alt-key->
 ####################################################################################################
 ```
 
-Incomplete list of products (missing the monitor and speakers, which it appears much of the customization can come from the cabinet maker) for a keyboarded kiosk (all the buttons for navigation, every least the prompt entry, are touch enabled, or have buttons relating to the key shortcuts).
-
+A list of products for a keyboarded kiosk.
 
 [LVL23C 54" Tall 2 Player Cabaret Arcade Cabinet Kit](https://www.amazon.com/LVL23C-Player-Cabaret-Cabinet-buttons/dp/B0CJ5ZSZRM/?_encoding=UTF8&pd_rd_w=pCyV7&content-id=amzn1.sym.4efc43db-939e-4a80-abaf-50c6a6b8c631%3Aamzn1.symc.5a16118f-86f0-44cd-8e3e-6c5f82df43d0&pf_rd_p=4efc43db-939e-4a80-abaf-50c6a6b8c631&pf_rd_r=4XQ3WPWS0WVDDBYB5GNH&pd_rd_wg=Gax4g&pd_rd_r=26d6c64d-efc4-4ba3-af94-98fbe466fe34&ref_=pd_hp_d_atf_ci_mcx_mr_ca_hp_atf_d)
 
@@ -117,16 +116,12 @@ Incomplete list of products (missing the monitor and speakers, which it appears 
 
 [RS232 Parallel Serial Port 2 Rows DB25 25 Pin D Sub Male/Female Connector + Plastic Assemble Shell Cover VAG Adapter, Pack of 10](https://www.amazon.com/dp/B07FS6VSVR?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_2)
 
-
 [20 Gauge 2 Conductor PVC Tinned Copper Electrical Wires, 32.8FT/10M Red and Black Double Parallel Wire,0.5mm²，for DIY Projects, Home Electrical, Power Wiring,Car Speaker Wires, LED Wires.](https://www.amazon.com/Conductor-Electrical-Parallel-0-5mm%C2%B2%EF%BC%8C-Projects/dp/B0FH4ZWCJ2/ref=sr_1_2_sspa?crid=KCV51U4F9I8J&dib=eyJ2IjoiMSJ9.4gMNwI72qTHHlRhswEaJr7-UcHK6EtxlD0fHQx0tJs17BKJMEC6CNDA2YXF3Io8l99fRQvhkZ6ONuOmd9sZxpQBD-Ur94KJ7uAaJ8f2Xb2gYFXWsp-BldAE6hF91b9fORsv5p8ekiuO6uVgWiMWmHsVOmSiaRnwyXYmZJMoKTtSd6z_K9bEN6hjWaxtQZnVqCE71gVcn8359lg8LCy5X4yd8pnNf-8n2NyRNzS2UAno.OZ8CWap5gnq3S2wqf9ZazwQgnD3OR4OVHteig6Mtnrs&dib_tag=se&keywords=speaker%2Bwire&qid=1767410925&sprefix=speaker%2Bwir%2Caps%2C241&sr=8-2-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1)
-
 
 [19 Inch Arcade Game LED Monitor, Jamma Monitor MAME and Cocktail Game cabinets](https://www.amazon.com/Arcade-Monitor-Cocktail-cabinets-industrial/dp/B004QJ6EN8/ref=sr_1_3?crid=3NDQA3RTK72JS&dib=eyJ2IjoiMSJ9.Q9Gs6t5QeF0BdNoTI075wBZpz5KMuwUiDSPR6gpuFlrrReLuFHaqHH5XQAG9fo-DS0XPl0nXVuvepDmKa8KSNxzL04IbvpJwyBjVBGBADmBjQ8K6y7Gc156da-aeXwyDgZ9ONAHLbEF9IG78Wy8eAETstjWCklQQ3gOl80FoGxZZc2TxwrrwMFYgJIdSgZmMbLJCGnxclLPcXclCDXVG1ImtGaAx9DVXNp9i7sE36oM.BZR2p1xvDw9VxkEildNBcJPF0Klhjov-9QxG47UT-5Y&dib_tag=se&keywords=19%22+Square+LCD+Monitor+for+arcade&qid=1767410232&sprefix=19+square+lcd+monitor+for+arcad%2Caps%2C180&sr=8-3)
 
 [Arcade Game Coin Door with 1 Mechanical Coin selector for US 25 Cent, Jamma, Mame and More!](https://www.amazon.com/Arcade-Game-mechanical-selector-Jamma/dp/B00F1YQJJ6/ref=sr_1_2?crid=26MO1ELFBDGD8&dib=eyJ2IjoiMSJ9.MuRB97Zip8KwCg33OF4KqdLmAMVm81Xw-j_1iKG81pabcOz6ZgBVhrJwZwa_6ynnpC8ICyl8Julx1QQyeMjQbg3dKYR-vzj_iX1-_nErOfIWsfoEk7lJi_T75_gKiBEPUCW6m6Zo1IN6t4xeY1vWCMEeQ_o0BUo3upDFKJGJehn1l_Yxh1UrPW4qxvycVFTd-0t_LlftvsiNJOd-QxSVot0nF_HRqCk0Ncqdz6NemXz29PZFtJGXZRqzcOMvRqNocHMB8dtSyfuLkTRllDAmhxLe_rj136jXvS3AFwCrWv0.g5sdLsYh9miX81uJZELdDx_Zc7LPCu1YVPe92tGoSu4&dib_tag=se&keywords=arcade+coin+box%2C+NC+or+NO+switch&qid=1767410395&sprefix=arcade+coin+box%2C+nc+or+no+switc%2Caps%2C187&sr=8-2)
 
-
 [Poyiccot 3.5mm Speaker Wire Adapter, 3.5mm 4 Pole Stereo TRRS Male Jack to AV 4 Screw Terminal Block Balun Connectors Cable 30cm](https://www.amazon.com/Poyiccot-Plated-4-Screw-Terminal-Connectors/dp/B07PQTKMM7/ref=sr_1_3?crid=17DJWD64293VS&dib=eyJ2IjoiMSJ9.x6u2IJ4-Z4m0wDQlI3OdTT4x-nPGA5ACBUVJzymK47E2AXusgpBiXQVd6DZPs3i1DtzWTrJFL36YtW9lIuf41g3-Ek80tEItOVqCMTdZs0TYQwksDeFLn8_Z3_zbtWtvSeyzihQat6OJGt5iOos7DDG0yg8HlL8qU3Cn6zfKzUCrlk5fUVhZdbdC-g8iqtI5vsdX-yUme_sI4pDPDhWqCX5iV-t49YQ21giYk-nYRRo.ilQ9TmQphYEBzEfZ22alAb7CLszjmJ2X8NaF3KW03Bs&dib_tag=se&keywords=4%22%2Bspeakers%2Bheadphone%2Bjack&qid=1767410690&sprefix=4%2Bspeakers%2Bheadphone%2B%2Caps%2C363&sr=8-3&th=1)
-
 
 [ProTechTrader 4 inch 8 ohm Loud Speaker - 10 w Max / 5 Watt Nominal Square Screw Mount Round Cone for Pinball Arcade Machines M.A.M.E. Video Games DIY Electronics Radios Computers](https://www.amazon.com/ProTechTrader-inch-100mm-Loud-Speaker/dp/B0G3D52FYG/ref=sr_1_1?crid=778HY874AUF1&dib=eyJ2IjoiMSJ9.7gNVbJqq24ak6NVSFZNXws_x94piktodNrrGvHIzL3ImkYpHaEFe4iCtuhmxUISLUv8TUJRGptQAYHRAH-qR3wjGGDvGBLoDr37xwr4WjXgiNTe-V0aCJlmxEGk7AN_XgKvvVUKBxAdlZs2aS78gVg1StAV9W-uZDN22Lr24495EwP2qtOppVqdKlPGBJwrS6ioyFKOw2sOyvcBJ7samzjPpfG2WSDAqEs88GIwwrVo._jIs90-LQK5vMf-e5FD3S0-KTMQnD13cF_ZCODn1J_0&dib_tag=se&keywords=4%22%2Bcomputer%2Bscrew%2Bspeakers&qid=1767410861&sprefix=4%2Bcomputer%2Bscrew%2Bspeakers%2Caps%2C209&sr=8-1&th=1)
