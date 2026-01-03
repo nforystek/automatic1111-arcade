@@ -23,7 +23,7 @@ Private AtOnstate As Integer
 
 
 Public Sub InitCheck()
-    'get the ports state, when no coin
+    'get the ports state, when no coin, or at startup state
     AtOnstate = Inp32(CInt(Val(LPT1)))
 End Sub
 Public Function CoinCheck() As Boolean
