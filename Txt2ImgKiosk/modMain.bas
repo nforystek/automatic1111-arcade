@@ -14,6 +14,7 @@ Option Explicit
 '
 '  SAFEMODE = -1/0  Sets whether or not to put the system into restrictive mode as a Kiosk (=0) (i.e. unable to use most of the
 '                   options in CTRL+ALT+DEL) or to keep the Windows 11 system options as normal (=-1) safely allowing TaskMngr
+'                   *screen savers, pwoer savers, hot keys, mouse, and everything but accessibility in CTRL+ALT+DEL is disabled.
 '
 '  USESD = -1/0     Sets whether or not the application should start the Stable-Diffusion Automatic1111 webui (=-1) or
 '                   to fake it (=0) (i.e. debigging other portions like graphics not invovled with generating an image).
@@ -25,9 +26,13 @@ Option Explicit
 '
 '  USEESC = -1/0    Sets whether or not the ESCAPE key will immediatly close the program (=-1) or the ESCAPE key will be ignored (=0)
 '
-'  During a production compile of this application for an Arcade box, you will want the following compile considiton values set:
+'  During a production compile of this application for an Arcade box, you will want the following compile condition values set:
 '
 '  VBIDE = 0 : SAFEMODE = 0 : USESD = -1 : USECOIN = -1 : USEESC = 0
+'
+'  During a development run environment of this application for an Arcade box, I usually use the following compile condition values set:
+'
+'  VBIDE = -1 : SAFEMODE = -1 : USESD = -1 : USECOIN = 0 : USEESC = -1
 '
 '  Other compile considtions that are not nessisarily used may be set for different module awareness are the module names as follows:
 '
@@ -44,14 +49,15 @@ Option Explicit
 '
 '##########################################################
 
-Public Const VotePeriod = 1 '28 'this is what a election period will be in days before votes reset, if in period vote mode
-Public Const ResetVotes = 2 '14 'during the period, if this many votes are not met, it will not reset votes on the period
+Public Const VotePeriod = 5 '28 'this is what a election period will be in days before votes reset, if in period vote mode
+Public Const ResetVotes = 5 '14 'during the period, if this many votes are not met, it will not reset votes on the period
                             'and possibly change the terms of the election to be no term, or having a term of VotePeriod
 
 Public Const TopNumberOf = 3 '12  'what number to make the top 10 so to speak, or top 5, anything from 1 to 12
-Public Const TotalImages = 15 '50 'as much as you want the scroll for voting to be in held image cache and must
-'be above the TopNumberOf, theoretically significantly, these are not viewable unless you have credits in.
+Public Const TotalImages = 20 '50 'as much as you want to be held in the scroll image cache for voting and must
+    'be above the TopNumberOf, theoretically significantly, these are not viewable unless you have credits in.
 
+'end customization
 
 Public VotingTerm As String 'if this value is before the current date, then we are in no timeline term voting, else term voting
 Public PeriodicVotes As Long 'determined by the voting term from the above variable, when in term voting, this is how many votes
@@ -59,7 +65,6 @@ Public PeriodicVotes As Long 'determined by the voting term from the above varia
                             'the current virtual voting term, that if met, will change the no term voting to term voting. in
                             'term voting, when the term timeline is met and votes are enough it remains term voting then the
                             'votes of every picture are reset to zero, in no term voting the votes don't get reset, as scores.
-
 
 Public LastError As String
 Public WebUIURL As String
@@ -227,6 +232,8 @@ Public Sub Main()
 
     If Not App.PrevInstance Then
             
+        InitCheck
+        
         Randomize
 
         'ensure we have a database or create the default from resource

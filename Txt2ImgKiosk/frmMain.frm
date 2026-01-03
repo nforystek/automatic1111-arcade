@@ -6,7 +6,7 @@ Begin VB.Form frmMain
    ClientHeight    =   10095
    ClientLeft      =   -45
    ClientTop       =   -105
-   ClientWidth     =   24060
+   ClientWidth     =   20985
    ClipControls    =   0   'False
    ControlBox      =   0   'False
    BeginProperty Font 
@@ -25,7 +25,7 @@ Begin VB.Form frmMain
    MousePointer    =   2  'Cross
    Moveable        =   0   'False
    ScaleHeight     =   10095
-   ScaleWidth      =   24060
+   ScaleWidth      =   20985
    StartUpPosition =   2  'CenterScreen
    Visible         =   0   'False
    WindowState     =   2  'Maximized
@@ -92,7 +92,7 @@ Begin VB.Form frmMain
          Height          =   6615
          Index           =   1
          Left            =   2280
-         Picture         =   "frmMain.frx":0442
+         Picture         =   "frmMain.frx":4120C
          Stretch         =   -1  'True
          Top             =   1560
          Width           =   27375
@@ -101,7 +101,7 @@ Begin VB.Form frmMain
          Height          =   6615
          Index           =   0
          Left            =   480
-         Picture         =   "frmMain.frx":1207C
+         Picture         =   "frmMain.frx":52E46
          Stretch         =   -1  'True
          Top             =   1920
          Width           =   27375
@@ -110,7 +110,7 @@ Begin VB.Form frmMain
          Height          =   6615
          Index           =   2
          Left            =   1200
-         Picture         =   "frmMain.frx":282EA
+         Picture         =   "frmMain.frx":690B4
          Stretch         =   -1  'True
          Top             =   1080
          Width           =   27375
@@ -438,7 +438,7 @@ Begin VB.Form frmMain
       Begin VB.Image Image4 
          Height          =   2250
          Left            =   840
-         Picture         =   "frmMain.frx":4116A
+         Picture         =   "frmMain.frx":81F34
          Stretch         =   -1  'True
          Top             =   930
          Width           =   26085
@@ -575,6 +575,14 @@ Private Sub SetWidth(ByRef ctrl As Control, ByVal Val As Single)
 End Sub
 Private Sub SetHeight(ByRef ctrl As Control, ByVal Val As Single)
     If ctrl.Height <> Val Then ctrl.Height = Val
+End Sub
+
+Private Sub SetInterval(ByVal ToInterval As Long, Optional ByVal ByPass As Boolean = False)
+    If Timer1.Enabled Or ByPass Then
+        Timer1.Enabled = False
+        Timer1.Interval = ToInterval
+        Timer1.Enabled = True
+    End If
 End Sub
 'all control (buttons etc...) is bipassed to this function, there is no mouse
 Private Function KeyHandler(KeyCode As Integer, Shift As Integer) As Boolean
@@ -826,11 +834,7 @@ Private Sub Command0_Click()
                 ShowTab TAB_LEADERBOARD
         End Select
     End If
-    If Timer1.Enabled Then
-        Timer1.Enabled = False
-        Timer1.Interval = TIMER_NOCREDITS
-        Timer1.Enabled = True
-    End If
+    SetInterval TIMER_NOCREDITS
 End Sub
 Private Sub Command1_Click()
     If Credit = 0 Then
@@ -854,11 +858,7 @@ Private Sub Command1_Click()
                 ShowTab TAB_LEADERBOARD
         End Select
     End If
-    If Timer1.Enabled Then
-        Timer1.Enabled = False
-        Timer1.Interval = TIMER_NOCREDITS
-        Timer1.Enabled = True
-    End If
+    SetInterval TIMER_NOCREDITS
 End Sub
 
 Private Sub Command0_KeyDown(KeyCode As Integer, Shift As Integer)
@@ -1004,108 +1004,108 @@ End Sub
 Private Sub Form_Resize()
     On Error Resume Next
     
-    Picture3.Left = 0
-    Picture3.Top = 0
-    Picture3.Width = Me.ScaleWidth
-    Picture3.Height = Me.ScaleHeight - Command0.Height
+    SetLeft Picture3, 0
+    SetTop Picture3, 0
+    SetWidth Picture3, Me.ScaleWidth
+    SetHeight Picture3, Me.ScaleHeight - Command0.Height
 
-    Image3(0).Left = 0
-    Image3(0).Top = 0
-    Image3(0).Width = Picture3.Width
-    Image3(0).Height = (Picture3.Height \ 3)
+    SetLeft Image3(0), 0
+    SetTop Image3(0), 0
+    SetWidth Image3(0), Picture3.Width
+    SetHeight Image3(0), (Picture3.Height \ 3)
     
-    Image3(1).Left = 0
-    Image3(1).Top = Image3(0).Height
-    Image3(1).Width = Picture3.Width
-    Image3(1).Height = (Picture3.Height \ 3)
+    SetLeft Image3(1), 0
+    SetTop Image3(1), Image3(0).Height
+    SetWidth Image3(1), Picture3.Width
+    SetHeight Image3(1), (Picture3.Height \ 3)
     
-    Image3(2).Left = 0
-    Image3(2).Top = (Image3(0).Height * 2)
-    Image3(2).Width = Picture3.Width
-    Image3(2).Height = (Picture3.Height \ 3)
+    SetLeft Image3(2), 0
+    SetTop Image3(2), (Image3(0).Height * 2)
+    SetWidth Image3(2), Picture3.Width
+    SetHeight Image3(2), (Picture3.Height \ 3)
         
-    Command0.Top = Me.ScaleHeight - Command0.Height
-    Command1.Top = Command0.Top
-    Command2.Top = Command0.Top - Command2.Height
-    Command3.Top = Command0.Top - Command3.Height
-    Command4.Top = Command0.Top - Command4.Height
+    SetTop Command0, Me.ScaleHeight - Command0.Height
+    SetTop Command1, Command0.Top
+    SetTop Command2, Command0.Top - Command2.Height
+    SetTop Command3, Command0.Top - Command3.Height
+    SetTop Command4, Command0.Top - Command4.Height
     
-    Command0.Left = 0
-    Command0.Width = Me.ScaleWidth / 2
-    Command1.Left = Me.ScaleWidth / 2
-    Command1.Width = Me.ScaleWidth / 2
+    SetLeft Command0, 0
+    SetWidth Command0, Me.ScaleWidth / 2
+    SetLeft Command1, Me.ScaleWidth / 2
+    SetWidth Command1, Me.ScaleWidth / 2
     
-    Command2.Left = 0
-    Command2.Left = 0
-    Command3.Left = 0
-    Command4.Left = 0
+    SetLeft Command2, 0
+    SetLeft Command2, 0
+    SetLeft Command3, 0
+    SetLeft Command4, 0
     
-    Command2.Width = Me.ScaleWidth
-    Command3.Width = Me.ScaleWidth
-    Command4.Width = Me.ScaleWidth
+    SetWidth Command2, Me.ScaleWidth
+    SetWidth Command3, Me.ScaleWidth
+    SetWidth Command4, Me.ScaleWidth
 
-    Frame3.Top = 0
-    Frame3.Left = 0
-    Frame3.Width = Me.ScaleWidth
-    Frame3.Height = (Me.ScaleHeight - Command1.Height)
+    SetTop Frame3, 0
+    SetLeft Frame3, 0
+    SetWidth Frame3, Me.ScaleWidth
+    SetHeight Frame3, (Me.ScaleHeight - Command1.Height)
     
-    Image4.Top = 0
-    Image4.Left = 0
-    Image4.Width = Me.ScaleWidth
+    SetTop Image4, 0
+    SetLeft Image4, 0
+    SetWidth Image4, Me.ScaleWidth
     
-    Picture2.Left = (Frame3.Width / 2) - (Picture2.Width / 2)
-    Picture2.Top = ((Frame3.Height / 2) + (Image4.Height / 2)) - (Picture2.Height / 2)
-    Label5.Top = Picture2.Top - Label5.Height
-    Label5.Left = Picture2.Left
-    Label5.Width = Picture2.Width
+    SetLeft Picture2, (Frame3.Width / 2) - (Picture2.Width / 2)
+    SetTop Picture2, ((Frame3.Height / 2) + (Image4.Height / 2)) - (Picture2.Height / 2)
+    SetTop Label5, Picture2.Top - Label5.Height
+    SetLeft Label5, Picture2.Left
+    SetWidth Label5, Picture2.Width
     
-    Frame1.Height = ((Frame3.Height - Command1.Height) / 2)
-    Frame2.Height = Frame1.Height
-    Frame1.Width = Me.ScaleWidth
-    Frame2.Width = Me.ScaleWidth
-    Frame1.Top = 0
-    Frame1.Left = 0
-    Frame2.Top = Frame1.Height
-    Frame2.Left = 0
+    SetHeight Frame1, ((Frame3.Height - Command1.Height) / 2)
+    SetHeight Frame2, Frame1.Height
+    SetWidth Frame1, Me.ScaleWidth
+    SetWidth Frame2, Me.ScaleWidth
+    SetTop Frame1, 0
+    SetLeft Frame1, 0
+    SetTop Frame2, Frame1.Height
+    SetLeft Frame2, 0
     
-    Text1.Width = Frame1.Width - (Text1.Left * 2)
-    Text2.Width = Frame2.Width - (Text2.Left * 2)
-    Text1.Height = Frame1.Height - Text1.Top - Text1.Left
-    Text2.Height = Frame2.Height - Text2.Top - Text2.Left
+    SetWidth Text1, Frame1.Width - (Text1.Left * 2)
+    SetWidth Text2, Frame2.Width - (Text2.Left * 2)
+    SetHeight Text1, Frame1.Height - Text1.Top - Text1.Left
+    SetHeight Text2, Frame2.Height - Text2.Top - Text2.Left
         
-    Picture1.Width = ImageWidth * Screen.TwipsPerPixelX
-    Picture1.Height = ImageHeight * Screen.TwipsPerPixelY
+    SetWidth Picture1, ImageWidth * Screen.TwipsPerPixelX
+    SetHeight Picture1, ImageHeight * Screen.TwipsPerPixelY
     
-    Picture1.Top = ((Me.ScaleHeight - Command1.Height) / 2) - (Picture1.Height / 2)
-    Picture1.Left = (Me.ScaleWidth / 2) - (Picture1.Width / 2)
+    SetTop Picture1, ((Me.ScaleHeight - Command1.Height) / 2) - (Picture1.Height / 2)
+    SetLeft Picture1, (Me.ScaleWidth / 2) - (Picture1.Width / 2)
     
-    Image1.Top = 0
-    Image1.Left = 0
-    Image1.Width = Picture1.Width
-    Image1.Height = Picture1.Height
+    SetTop Image1, 0
+    SetLeft Image1, 0
+    SetWidth Image1, Picture1.Width
+    SetHeight Image1, Picture1.Height
     
-    Label1.Left = Picture1.Left
-    Label1.Width = Picture1.Width
-    Label1.Top = Picture1.Top - Label1.Height
+    SetLeft Label1, Picture1.Left
+    SetWidth Label1, Picture1.Width
+    SetTop Label1, Picture1.Top - Label1.Height
 
-    Label2.Left = Picture1.Left
-    Label2.Width = Picture1.Width
-    Label2.Top = Picture1.Top + Picture1.Height
+    SetLeft Label2, Picture1.Left
+    SetWidth Label2, Picture1.Width
+    SetTop Label2, Picture1.Top + Picture1.Height
     
-    Picture4.Top = Picture1.Top
-    Picture4.Left = Picture1.Left
-    Picture4.Width = Picture1.Width
-    Picture4.Height = Picture1.Height
+    SetTop Picture4, Picture1.Top
+    SetLeft Picture4, Picture1.Left
+    SetWidth Picture4, Picture1.Width
+    SetHeight Picture4, Picture1.Height
     
-    Label4.Top = (Picture1.Height / 2) - (Label4.Height / 2)
-    Label4.Left = (Picture1.Width / 2) - (Label4.Width / 2)
+    SetTop Label4, (Picture1.Height / 2) - (Label4.Height / 2)
+    SetLeft Label4, (Picture1.Width / 2) - (Label4.Width / 2)
     
     Dim cnt As Long
     For cnt = Image5.LBound To Image5.UBound
-        Image5(cnt).Top = 0
-        Image5(cnt).Left = 0
-        Image5(cnt).Width = Picture4.Width
-        Image5(cnt).Height = Picture4.Height
+        SetTop Image5(cnt), 0
+        SetLeft Image5(cnt), 0
+        SetWidth Image5(cnt), Picture4.Width
+        SetHeight Image5(cnt), Picture4.Height
     Next
        
     If Err Then Err.Clear
@@ -1151,17 +1151,17 @@ Private Function MoveImageRight() As Long
         For cnt = Image5.LBound To Image5.UBound
             If Image5(cnt).Visible Then
                 If cnt = Image5.UBound Then
-                    Image5(Image5.LBound).Visible = True
+                    SetVisible Image5(Image5.LBound), True
                     MoveImageRight = (Image5.LBound + 1)
                 Else
-                    Image5(cnt + 1).Visible = True
+                    SetVisible Image5(cnt + 1), True
                     MoveImageRight = ((cnt + 1) + 1)
                 End If
-                Image5(cnt).Visible = False
+                SetVisible Image5(cnt), False
                 Exit For
             End If
         Next
-        Label1.Caption = "Image Election Gallery: (" & Trim(CStr(MoveImageRight)) & " of " & Trim(CStr(Image5.Count)) & ")"
+        SetCaption Label1, "Image Election Gallery: (" & Trim(CStr(MoveImageRight)) & " of " & Trim(CStr(Image5.Count)) & ")"
     End If
 End Function
 
@@ -1171,17 +1171,17 @@ Private Function MoveImageLeft() As Long
         For cnt = Image5.LBound To Image5.UBound
             If Image5(cnt).Visible Then
                 If cnt = Image5.LBound Then
-                    Image5(Image5.UBound).Visible = True
+                    SetVisible Image5(Image5.UBound), True
                     MoveImageLeft = (Image5.UBound + 1)
                 Else
-                    Image5(cnt - 1).Visible = True
+                    SetVisible Image5(cnt - 1), True
                     MoveImageLeft = cnt
                 End If
-                Image5(cnt).Visible = False
+                SetVisible Image5(cnt), False
                 Exit For
             End If
         Next
-            Label1.Caption = "Image Election Gallery: (" & Trim(CStr(MoveImageLeft)) & " of " & Trim(CStr(Image5.Count)) & ")"
+        SetCaption Label1, "Image Election Gallery: (" & Trim(CStr(MoveImageLeft)) & " of " & Trim(CStr(Image5.Count)) & ")"
     End If
 End Function
 
@@ -1221,19 +1221,17 @@ Private Sub VoteOnImage()
                 SetState STATE_WORKING
                 FileVoteFor ID
                 SetState STATE_READY
-                Timer1.Enabled = False
-                Timer1.Interval = TIMER_TEMPINFO
+                SetInterval TIMER_TEMPINFO, True
+
                 Label2.Caption = "You've added 1 vote for this image!"
-                Timer1.Enabled = True
                 
                 IncrementVotedCount
             End If
         End If
     ElseIf Credit = 0 Then 'show a red error
         Command4.BackColor = &HFF&
-        Timer1.Enabled = False
-        Timer1.Interval = TIMER_TEMPINFO
-        Timer1.Enabled = True
+        SetInterval TIMER_TEMPINFO, True
+
     End If
 End Sub
 
@@ -1242,12 +1240,8 @@ Private Sub ViewTopChats(ByVal Place As Long)
 
         ShowTab TAB_VIEWIMAGE
         ViewWinner Place
-        
-        If Timer1.Enabled Then
-            Timer1.Enabled = False
-            Timer1.Interval = TIMER_NOCREDITS
-            Timer1.Enabled = True
-        End If
+        SetInterval TIMER_NOCREDITS
+
     End If
 End Sub
 
@@ -1290,9 +1284,8 @@ Private Sub CreateImage()
     
     ElseIf Credit = 0 Then 'show a red error
         Command2.BackColor = &HFF&
-        Timer1.Enabled = False
-        Timer1.Interval = TIMER_TEMPINFO
-        Timer1.Enabled = True
+        SetInterval TIMER_TEMPINFO, True
+
     End If
 End Sub
 
@@ -1448,12 +1441,7 @@ Private Sub oImager_DataReceived(ByVal sData As String)
                 SetVisible Label4, False
             End If
             
-            
-            If Timer1.Enabled Then
-                SetEnabled Timer1, False
-                Timer1.Interval = TIMER_NOCREDITS
-                SetEnabled Timer1, True
-            End If
+            SetInterval TIMER_NOCREDITS
 
         ElseIf process Then
             
@@ -1674,9 +1662,9 @@ Private Sub ViewWinner(Optional ByVal Place As Long = -1)
         For tmp = Command5.LBound + 1 To Command5.UBound
             Unload Command5(tmp)
         Next
-        Picture2.Height = ((Image2(0).Top * 2) + Image2(0).Height)
-        Label3(0).Top = (Image2(0).Top + (Image2(0).Height / 2)) - (Label3(0).Height / 2)
-        Command5(0).Top = Image2(0).Top
+        SetHeight Picture2, ((Image2(0).Top * 2) + Image2(0).Height)
+        SetTop Label3(0), (Image2(0).Top + (Image2(0).Height / 2)) - (Label3(0).Height / 2)
+        SetTop Command5(0), Image2(0).Top
         
         
     End If
@@ -1697,31 +1685,31 @@ Private Sub ViewWinner(Optional ByVal Place As Long = -1)
     
     If Place = -1 Then
         If tmp > 0 Then
-            Image2(Image2.UBound).Visible = True
-            Label3(Label3.UBound).Visible = True
-            Command5(Command5.UBound).Visible = True
+            SetVisible Image2(Image2.UBound), True
+            SetVisible Label3(Label3.UBound), True
+            SetVisible Command5(Command5.UBound), True
                 
-            Picture2.Height = ((Image2(0).Top * 2) + Image2(0).Height)
+            SetHeight Picture2, ((Image2(0).Top * 2) + Image2(0).Height)
             
             Do Until tmp = 1
                 Load Image2(Image2.UBound + 1)
                 Load Label3(Label3.UBound + 1)
                 Load Command5(Command5.UBound + 1)
                 tmp = tmp - 1
-                Picture2.Height = Picture2.Height + (Image2(0).Top + Image2(0).Height)
-                Image2(Image2.UBound).Top = (Image2(Image2.UBound - 1).Top + Image2(Image2.UBound - 1).Height) + Image2(0).Top
-                Label3(Image2.UBound).Top = (Image2(Image2.UBound).Top + (Image2(Image2.UBound).Height / 2)) - (Label3(Image2.UBound).Height / 2)
-                Command5(Command5.UBound).Top = Image2(Image2.UBound).Top
-                Image2(Image2.UBound).Visible = True
-                Label3(Label3.UBound).Visible = True
-                Command5(Command5.UBound).Visible = True
+                SetHeight Picture2, Picture2.Height + (Image2(0).Top + Image2(0).Height)
+                SetTop Image2(Image2.UBound), (Image2(Image2.UBound - 1).Top + Image2(Image2.UBound - 1).Height) + Image2(0).Top
+                SetTop Label3(Image2.UBound), (Image2(Image2.UBound).Top + (Image2(Image2.UBound).Height / 2)) - (Label3(Image2.UBound).Height / 2)
+                SetTop Command5(Command5.UBound), Image2(Image2.UBound).Top
+                SetVisible Image2(Image2.UBound), True
+                SetVisible Label3(Label3.UBound), True
+                SetVisible Command5(Command5.UBound), True
             Loop
             
             Form_Resize
         Else
             Set Image2(0).Picture = LoadPicture("")
             SetCaption Label3(0), "No image votes yet!"
-            Command5(0).Visible = False
+            SetVisible Command5(0), False
         End If
    End If
 
@@ -1739,14 +1727,14 @@ Private Sub ViewWinner(Optional ByVal Place As Long = -1)
             
             Select Case tmp
                 Case 1
-                    SetCaption Label3(tmp - 1), "1st place with " & votes & " votes (F1)"
+                    SetCaption Label3(tmp - 1), "1st place with " & votes & " votes"
                     
                 Case 2
-                    SetCaption Label3(tmp - 1), "2nd place with " & votes & " votes (F2)"
+                    SetCaption Label3(tmp - 1), "2nd place with " & votes & " votes"
                 Case 3
-                    SetCaption Label3(tmp - 1), "3rd place with " & votes & " votes (F3)"
+                    SetCaption Label3(tmp - 1), "3rd place with " & votes & " votes"
                 Case Else
-                    SetCaption Label3(tmp - 1), Trim(CStr(tmp)) & "th place with " & votes & " votes (F" & Trim(CStr(tmp)) & ")"
+                    SetCaption Label3(tmp - 1), Trim(CStr(tmp)) & "th place with " & votes & " votes"
             End Select
             
             Command5(tmp - 1).Caption = "View (F" & Trim(CStr(tmp)) & ")"
