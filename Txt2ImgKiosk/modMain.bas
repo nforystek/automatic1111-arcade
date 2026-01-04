@@ -92,6 +92,9 @@ Public Sub RegistrySet(ByVal IO As Long)
 
     RegWriteDWORD HKEY_CURRENT_USER, "Software\Microsoft\Windows\CurrentVersion\Policies\System", "DisableTaskmgr", IO, True
     RegWriteDWORD HKEY_CURRENT_USER, "Software\Microsoft\Windows\CurrentVersion\Policies\System", "DisableTaskmgr", IO, False
+
+    RegWriteDWORD HKEY_CURRENT_USER, "Software\Microsoft\Windows\CurrentVersion\Policies\System", "DisableChangePassword", IO, True
+    RegWriteDWORD HKEY_CURRENT_USER, "Software\Microsoft\Windows\CurrentVersion\Policies\System", "DisableChangePassword", IO, False
     
     RegWriteDWORD HKEY_LOCAL_MACHINE, "Software\Microsoft\Windows\CurrentVersion\Policies\System", "HideFastUserSwitching", IO, True
     RegWriteDWORD HKEY_LOCAL_MACHINE, "Software\Microsoft\Windows\CurrentVersion\Policies\System", "HideFastUserSwitching", IO, False
@@ -117,8 +120,8 @@ Public Sub Install()
             
         #End If
             
-        RegWriteString HKEY_LOCAL_MACHINE, "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", "Shell", AppPath & "kioskapp.exe", True
-        RegWriteString HKEY_LOCAL_MACHINE, "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", "Shell", AppPath & "kioskapp.exe", False
+        RegWriteString HKEY_LOCAL_MACHINE, "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", "Shell", AppPath & "Txt2ImgKiosk.exe", True
+        RegWriteString HKEY_LOCAL_MACHINE, "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", "Shell", AppPath & "Txt2ImgKiosk.exe", False
         Do While IsProccessEXERunning("explorer.exe", False)
             KillApp "explorer.exe", False
         Loop
@@ -137,7 +140,7 @@ Public Sub Uninstall(Optional StartUp As Boolean = False)
 
         frmMain.Hide
                 
-        #If VBIDE = 0 Then
+        '#If VBIDE = 0 Then
         
             DeactivatePowerMonitor
 
@@ -150,7 +153,7 @@ Public Sub Uninstall(Optional StartUp As Boolean = False)
             Loop
             RunProcess Environ("SystemRoot") & "\Explorer.exe"
 
-        #End If
+        '#End If
 
     End If
 
