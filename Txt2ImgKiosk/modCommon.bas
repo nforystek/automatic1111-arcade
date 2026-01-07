@@ -24,11 +24,9 @@ End Function
 
 Public Function AppPath() As String
     Dim lpTemp As String
-#If VBIDE Then
-    lpTemp = "C:\Stable-diffusion\"
-#Else
+
     lpTemp = IIf((Right(App.Path, 1) = "\"), App.Path, App.Path & "\")
-#End If
+
     AppPath = lpTemp
 End Function
 

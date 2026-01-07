@@ -108,3 +108,157 @@ Single Image View Screen >------> Election Gallery Vote/Views >-----> -alt-key->
 ####################################################################################################
 ```
 
+Step by step for preparing a Dell XPS with Windows 11 (in
+
+example) to run this legacy Kiosk Template application.
+
+1. Crate the Kiosk admin digital card. Using a digital card or flash drive, (which ever the system interface accepts),
+
+  format the media using FAT32. Open Notepad (or a text editor) and create a single file on the new media drive
+
+  by the name of "KIOSK" no file extension. Inside this file, using a text based editor put the following line:
+
+  "6E98DE51-5380-D7AC-D780-5351DE986E6E"
+
+  No quotes, tabs, new lines or spaces, as the single only first line of text in the file KIOSK.
+
+  Remove the media and hold on to it for later. It will become a valuable part of administration.
+
+ 
+
+2. Taskbar Search For "Control Panel" and open by clicking it, then find and click "Change User Account Control settings"
+
+  using "Control Panel" search. Set "Choose when to be notified about changes to your computer" to "Never notify"
+
+3. Taskbar Search For "gpedit.msc" -> Run it by clicking it, the group policy editor (gpedit) MMC will open, find the path
+
+  "\Local Computer Policy\Computer Configuration\Windows Settings\Security Settings\Local Policies\Security Options"
+
+  Under Security Options, find "User Account Control: Run all administrators in Admin Approval Mode" set it to "Disabled"
+
+4. Create a suitable location to house the executables, such as C:\Txt2ImgKiosk
+
+  Copy Txt2ImgKiosk.exe and ShellSwap.exe to the chosen location C:\Txt2ImgKiosk
+
+5. Select "C:\Txt2ImgKiosk\Txt2ImgKiosk.exe" in file explorer and right click
+
+  it, then click the Properties menu, and click the Security tab.
+
+ 
+
+  Use the "Edit" button to add users or change their permissions to ensure the
+
+  following users and their allowed permissions listed here are set for the file:
+
+    Authenticated Users: Allow: Full Control, Modify, Read & execute, Read, Write
+
+    Local account: Allow: Full Control, Modify, Read & execute, Read, Write
+
+    SYSTEM: Allow: Full Control, Modify, Read & execute, Read, Write
+
+    Administrators: Allow: Full Control, Modify, Read & execute, Read, Write
+
+    Local account: Allow: Read & execute & Read
+
+  To add a user after you click the "Edit" button click the "Add..." button then click the "Advanced..." button
+
+  and then click the "Find Now" button. A list of user accounts will appear at the bottom of the window, choose
+
+  the account you need to add by highlighting it, and then click the "OK" button, and the "OK" button again.
+
+  Repeat these steps for any user not seen in the permission list by clicking the "Add..." button again. When
+
+  you highlight a user, the permissions set for that user show up in a list below, ensure the users match the
+
+  above permissions for "Allow" and leave all the "Deny" unchecked, and non mentioned permissions unchecked too.
+
+  When finished click the "OK" button to return back to the file properties window.
+
+ 
+
+  Click the "Compatibility" tab. Click the "Change Settings for all Users" button, ensure all
+
+  options are unchecked, click OK, and again ensure all options are unchecked and click OK.
+
+7. Create a new local user account
+
+  Open Settings:
+
+  Press Windows + I to open Settings.
+
+  Go to Accounts:
+
+  Accounts → Other users.
+
+  Add a new user:
+
+  Click Add account under Other users.
+
+  In the dialog, choose I don’t have this person’s sign-in information.
+
+  Then choose Add a user without a Microsoft account.
+
+  Enter a username and password (don’t skip the password to use auto logon—it’s required), plus security questions.
+
+  Click Next to create the account.
+
+8. Make that user is an administrator
+
+  Stay in Accounts → Other users.
+
+  Select the new account:
+
+  Click the account you just created.
+
+  Change account type:
+
+  Click Change account type.
+
+  In Account type, change from Standard User to Administrator.
+
+  Click OK.
+
+  Now that user is an admin.
+
+9. Enable automatic logon for that account (simplest method: netplwiz)
+
+  Open Run dialog:
+
+  Press Windows + R, type:
+
+  netplwiz
+
+  and press Enter.
+
+  Select the user:
+
+  In the User Accounts window:
+
+  Select the user account you want to auto log in with (the admin account you just created).
+
+  Disable password requirement:
+
+  Uncheck Users must enter a user name and password to use this computer.
+
+  Click Apply.
+
+  Enter credentials:
+
+  A dialog appears asking for the user name and password for automatic logon:
+
+  Confirm the username is correct.
+
+  Enter the password for that account twice.
+
+  Click OK.
+
+  Confirm and close:
+
+  Click OK again to close the User Accounts window.
+
+10. Run "C:\Txt2ImgKiosk\Txt2ImgKiosk.exe" by double clicking it, this will finalize the Kiosk running system.
+
+   Note, the digital card made earlier is only a temporary pause in the Kiosk mode when inserted, the Kiosk
+
+   remains still running, remove the card and the Kiosk returns to normal operation.
+

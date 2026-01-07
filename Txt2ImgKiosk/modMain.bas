@@ -59,6 +59,9 @@ Public Const TopNumberOf = 3 '12  'what number to make the top 10 so to speak, o
 Public Const TotalImages = 20 '50 'as much as you want to be held in the scroll image cache for voting and must
     'be above the TopNumberOf, theoretically significantly, these are not viewable unless you have credits in.
 
+Public Const TaperVoteReset = True 'sets whether or not the top votes are reset to their positions in the rank as their vote count
+                                'when the vote term changes from no term to term or term to no term, if false, votes reset to zero
+
 'end customization
 
 Public VotingTerm As String 'if this value is before the current date, then we are in no timeline term voting, else term voting
@@ -92,6 +95,9 @@ Public Sub RegistrySet(ByVal IO As Long)
 
     RegWriteDWORD HKEY_CURRENT_USER, "Software\Microsoft\Windows\CurrentVersion\Policies\System", "DisableTaskmgr", IO, True
     RegWriteDWORD HKEY_CURRENT_USER, "Software\Microsoft\Windows\CurrentVersion\Policies\System", "DisableTaskmgr", IO, False
+
+    RegWriteDWORD HKEY_CURRENT_USER, "Software\Microsoft\Windows\CurrentVersion\Policies\System", "DisableChangePassword", IO, True
+    RegWriteDWORD HKEY_CURRENT_USER, "Software\Microsoft\Windows\CurrentVersion\Policies\System", "DisableChangePassword", IO, False
     
     RegWriteDWORD HKEY_LOCAL_MACHINE, "Software\Microsoft\Windows\CurrentVersion\Policies\System", "HideFastUserSwitching", IO, True
     RegWriteDWORD HKEY_LOCAL_MACHINE, "Software\Microsoft\Windows\CurrentVersion\Policies\System", "HideFastUserSwitching", IO, False
@@ -117,8 +123,8 @@ Public Sub Install()
             
         #End If
             
-        RegWriteString HKEY_LOCAL_MACHINE, "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", "Shell", AppPath & "kioskapp.exe", True
-        RegWriteString HKEY_LOCAL_MACHINE, "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", "Shell", AppPath & "kioskapp.exe", False
+        RegWriteString HKEY_LOCAL_MACHINE, "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", "Shell", AppPath & App.EXEName & ".exe", True
+        RegWriteString HKEY_LOCAL_MACHINE, "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", "Shell", AppPath & App.EXEName & ".exe", False
         Do While IsProccessEXERunning("explorer.exe", False)
             KillApp "explorer.exe", False
         Loop
@@ -131,9 +137,9 @@ Public Sub Install()
     End If
 End Sub
 
-Public Sub Uninstall(Optional StartUp As Boolean = False)
+Public Sub Uninstall()
     'opposite of the above install function in every way
-    If frmMain.Visible Or StartUp Then
+    If frmMain.Visible Then
 
         frmMain.Hide
                 
@@ -176,33 +182,63 @@ Public Sub MyDebugPrint(ByVal Msg As String)
     RegistrySet 0
 End Sub
 
+
 Public Sub TestForUSBKey()
-    'To regain control to pheyical presence of the Windows 11 machine,
-    'a removable drive is used with a single file named "KIOSK" which
-    'contains the GUID below inside as text and nothing else, no extension.
-    'upon inserting, the system goes immediatly to the Windows 11 desktop.
-    
-    Dim fso As Object, drv As Object, found As Boolean
-    Set fso = CreateObject("Scripting.FileSystemObject")
-    For Each drv In fso.Drives
-        If PathExists(drv.DriveLetter & ":\KIOSK", True) Then
-            found = True
-            On Error Resume Next
-            If ReadFile(drv.DriveLetter & ":\KIOSK") = "6E98DE51-5380-D7AC-D780-5351DE986E6E" Then
-                Uninstall
+
+    Dim drv As String
+    Dim found As Boolean
+    Dim tmp As String
+    drv = "A"
+    Do Until drv = "Z" Or found
+        On Error Resume Next
+        tmp = Dir(drv & ":")
+        If Err.Number = 0 Then
+            On Error GoTo 0
+            If PathExists(drv & ":\KIOSK", True) Then
+                found = True
+                If ReadFile(drv & ":\KIOSK") = "6E98DE51-5380-D7AC-D780-5351DE986E6E" Then
+                    Uninstall
+                End If
             End If
-            If Err Then
-                MyDebugPrint "TestForUSBKey() Error: " & Err.Description
-                End
-            End If
+        Else
+            Err.Clear
+            On Error GoTo 0
         End If
-    Next
+        drv = Chr(Asc(drv) + 1)
+    Loop
     If Not found Then Install
     #If VBIDE = 0 Then
         If frmMain.Visible Then
             KillVisibleProcesses
         End If
     #End If
+    
+'    'To regain control to pheyical presence of the Windows 11 machine,
+'    'a removable drive is used with a single file named "KIOSK" which
+'    'contains the GUID below inside as text and nothing else, no extension.
+'    'upon inserting, the system goes immediatly to the Windows 11 desktop.
+'
+'    Dim fso As Object, drv As Object, found As Boolean
+'    Set fso = CreateObject("Scripting.FileSystemObject")
+'    For Each drv In fso.Drives
+'        If PathExists(drv.DriveLetter & ":\KIOSK", True) Then
+'            found = True
+'            On Error Resume Next
+'            If ReadFile(drv.DriveLetter & ":\KIOSK") = "6E98DE51-5380-D7AC-D780-5351DE986E6E" Then
+'                Uninstall
+'            End If
+'            If Err Then
+'                MyDebugPrint "TestForUSBKey() Error: " & Err.Description
+'                End
+'            End If
+'        End If
+'    Next
+'    If Not found Then Install
+'    #If VBIDE = 0 Then
+'        If frmMain.Visible Then
+'            KillVisibleProcesses
+'        End If
+'    #End If
 
 End Sub
 
@@ -234,9 +270,7 @@ Public Sub Main()
 
     If Not App.PrevInstance Then
             
-        InitCheck
-        
-       
+
         Randomize
 
         'ensure we have a database or create the default from resource
@@ -287,12 +321,11 @@ Public Sub Main()
             If PathExists(SDPath & "mywebui.bat", True) Then 'the file exists then continue...
 
                 'ensure we have the font installed that will be used on the form of this program
-                If PathExists(GetCurrentUserProfileFolder & "\AppData\Local\Microsoft\Windows\Fonts", False) Then
-                    If Not PathExists(GetCurrentUserProfileFolder & "\AppData\Local\Microsoft\Windows\Fonts\Transformers Movie.ttf", True) Then
-                        WriteResource GetCurrentUserProfileFolder & "\AppData\Local\Microsoft\Windows\Fonts\Transformers Movie.ttf", 101, "FONT"
-                    End If
-                ElseIf Not PathExists(Environ("SystemRoot") & "\Fonts\Transformers Movie.ttf", True) Then
+                If Not PathExists(Environ("SystemRoot") & "\Fonts\Transformers Movie.ttf", True) Then
+
                     WriteResource Environ("SystemRoot") & "\Fonts\Transformers Movie.ttf", 101, "FONT"
+                    InstallFontSystemWide Environ("SystemRoot") & "\Fonts\Transformers Movie.ttf"
+                    
                 End If
 
                 Dim fldrExists As Boolean
@@ -325,6 +358,8 @@ Public Sub Main()
                     Loop
                 #End If
                 
+                InitCheck
+       
                 Load frmMain
                 
                 LoadSettings

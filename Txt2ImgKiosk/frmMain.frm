@@ -1,5 +1,6 @@
 VERSION 5.00
 Begin VB.Form frmMain 
+   AutoRedraw      =   -1  'True
    BackColor       =   &H00000007&
    BorderStyle     =   1  'Fixed Single
    ClientHeight    =   11175
@@ -9,7 +10,7 @@ Begin VB.Form frmMain
    ClipControls    =   0   'False
    ControlBox      =   0   'False
    BeginProperty Font 
-      Name            =   "Transformers Movie"
+      Name            =   "Arial"
       Size            =   14.25
       Charset         =   0
       Weight          =   700
@@ -35,7 +36,6 @@ Begin VB.Form frmMain
    End
    Begin VB.PictureBox Picture4 
       Appearance      =   0  'Flat
-      AutoRedraw      =   -1  'True
       BackColor       =   &H00FFFFFF&
       BorderStyle     =   0  'None
       BeginProperty Font 
@@ -188,8 +188,6 @@ Begin VB.Form frmMain
       Width           =   4695
    End
    Begin VB.PictureBox Picture1 
-      AutoRedraw      =   -1  'True
-      AutoSize        =   -1  'True
       BackColor       =   &H00FFFFFF&
       BorderStyle     =   0  'None
       ClipControls    =   0   'False
@@ -309,7 +307,7 @@ Begin VB.Form frmMain
       BackColor       =   &H00FFFFFF&
       Caption         =   "Back (PAGE UP)"
       BeginProperty Font 
-         Name            =   "Transformers Movie"
+         Name            =   "Arial"
          Size            =   18
          Charset         =   0
          Weight          =   700
@@ -912,9 +910,9 @@ Private Sub Command4_Click()
 End Sub
 
 Private Sub SetAllFonts()
+    Dim ctrl As Control
     Me.Font = "Transformers Movie"
     If Me.Font = "Transformers Movie" Then
-        Dim ctrl As Control
         For Each ctrl In Me.Controls
             Select Case TypeName(ctrl)
                 Case "Label", "CommandButton", "Frame", "TextBox"
@@ -1657,6 +1655,40 @@ Private Sub Text2_KeyUp(KeyCode As Integer, Shift As Integer)
     TextKeyUpEntry Text2, Text2GreyText, KeyCode, Shift
 End Sub
 
+Private Sub ResetVoteTaper()
+
+    If TaperVoteReset Then
+    
+        FileGetTopVotes
+
+        Dim cnt As Long
+        Dim ids As String
+        
+        cnt = 0
+        If Not rsFile.EOF Then
+            rsFile.MoveFirst
+            Do Until cnt = TopNumberOf Or rsFile.EOF
+                cnt = cnt + 1
+                ids = ids & rsFile("ID") & ","
+                rsFile.MoveNext
+            Loop
+        End If
+        dbClose rsFile
+        
+    End If
+    
+    dbQuery "UPDATE Files SET FileVote=0;"
+
+    If TaperVoteReset Then
+        Do Until ids = ""
+            dbQuery "UPDATE Files SET FileVote=" & cnt & " WHERE ID=" & RemoveNextArg(ids, ",") & ";"
+            cnt = cnt - 1
+        Loop
+    
+    End If
+
+End Sub
+
 'this function loads the image at place in the top whatever
 'and it refreshes the top whatever of images when place = -1
 Private Sub ViewWinner(Optional ByVal Place As Long = -1)
@@ -1685,7 +1717,6 @@ Private Sub ViewWinner(Optional ByVal Place As Long = -1)
         SetHeight Picture2, ((Image2(0).Top * 2) + Image2(0).Height)
         SetTop Label3(0), (Image2(0).Top + (Image2(0).Height / 2)) - (Label3(0).Height / 2)
         SetTop Command5(0), Image2(0).Top
-        
         
     End If
 
@@ -1862,8 +1893,9 @@ Private Sub DetermineVotingTerms()
 
                     'enough activity to switch to term based
                     VotingTerm = DateAdd("d", VotePeriod, Now)
-                    dbQuery "UPDATE Files SET FileVote=0;"
-
+                    ResetVoteTaper
+                    
+                    
                     PeriodicVotes = 0 'reset vote counter
                     SaveSettings
 
@@ -1883,8 +1915,8 @@ Private Sub DetermineVotingTerms()
                 
                 If (PeriodicVotes < ResetVotes) Then
                     VotingTerm = DateAdd("d", VotePeriod, Now)
-                    dbQuery "UPDATE Files SET FileVote=0;"
-                
+
+                    ResetVoteTaper
                     PeriodicVotes = 0 'reset vote counter
                     SaveSettings
 
