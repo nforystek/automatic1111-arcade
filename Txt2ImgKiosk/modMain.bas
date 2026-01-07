@@ -123,8 +123,13 @@ Public Sub Install()
             
         #End If
             
+<<<<<<< HEAD
         RegWriteString HKEY_LOCAL_MACHINE, "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", "Shell", AppPath & App.EXEName & ".exe", True
         RegWriteString HKEY_LOCAL_MACHINE, "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", "Shell", AppPath & App.EXEName & ".exe", False
+=======
+        RegWriteString HKEY_LOCAL_MACHINE, "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", "Shell", AppPath & "Txt2ImgKiosk.exe", True
+        RegWriteString HKEY_LOCAL_MACHINE, "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", "Shell", AppPath & "Txt2ImgKiosk.exe", False
+>>>>>>> de56a4e81b38f5d2d86a0a4069a0f175e8796827
         Do While IsProccessEXERunning("explorer.exe", False)
             KillApp "explorer.exe", False
         Loop
@@ -143,7 +148,7 @@ Public Sub Uninstall()
 
         frmMain.Hide
                 
-        #If VBIDE = 0 Then
+        '#If VBIDE = 0 Then
         
             DeactivatePowerMonitor
 
@@ -156,7 +161,7 @@ Public Sub Uninstall()
             Loop
             RunProcess Environ("SystemRoot") & "\Explorer.exe"
 
-        #End If
+        '#End If
 
     End If
 
