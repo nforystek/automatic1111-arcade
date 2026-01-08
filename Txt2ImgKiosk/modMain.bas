@@ -51,12 +51,12 @@ Option Explicit
 
 Public Const GlobalBackColor = &HC0C0C0
 
-Public Const VotePeriod = 1 '28 'this is what a election period will be in days before votes reset, if in period vote mode
-Public Const ResetVotes = 2 '14 'during the period, if this many votes are not met, it will not reset votes on the period
+Public Const VotePeriod = 28 'this is what a election period will be in days before votes reset, if in period vote mode
+Public Const ResetVotes = 14 'during the period, if this many votes are not met, it will not reset votes on the period
                             'and possibly change the terms of the election to be no term, or having a term of VotePeriod
 
-Public Const TopNumberOf = 3 '12  'what number to make the top 10 so to speak, or top 5, anything from 1 to 12
-Public Const TotalImages = 20 '50 'as much as you want to be held in the scroll image cache for voting and must
+Public Const TopNumberOf = 12  'what number to make the top 10 so to speak, or top 5, anything from 1 to 12
+Public Const TotalImages = 50 'as much as you want to be held in the scroll image cache for voting and must
     'be above the TopNumberOf, theoretically significantly, these are not viewable unless you have credits in.
 
 Public Const TaperVoteReset = True 'sets whether or not the top votes are reset to their positions in the rank as their vote count
