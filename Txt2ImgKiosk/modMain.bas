@@ -123,13 +123,10 @@ Public Sub Install()
             
         #End If
             
-<<<<<<< HEAD
+
         RegWriteString HKEY_LOCAL_MACHINE, "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", "Shell", AppPath & App.EXEName & ".exe", True
         RegWriteString HKEY_LOCAL_MACHINE, "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", "Shell", AppPath & App.EXEName & ".exe", False
-=======
-        RegWriteString HKEY_LOCAL_MACHINE, "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", "Shell", AppPath & "Txt2ImgKiosk.exe", True
-        RegWriteString HKEY_LOCAL_MACHINE, "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", "Shell", AppPath & "Txt2ImgKiosk.exe", False
->>>>>>> de56a4e81b38f5d2d86a0a4069a0f175e8796827
+
         Do While IsProccessEXERunning("explorer.exe", False)
             KillApp "explorer.exe", False
         Loop
@@ -217,7 +214,8 @@ Public Sub TestForUSBKey()
             KillVisibleProcesses
         End If
     #End If
-    
+
+'    'changed to avoid the needed added reference
 '    'To regain control to pheyical presence of the Windows 11 machine,
 '    'a removable drive is used with a single file named "KIOSK" which
 '    'contains the GUID below inside as text and nothing else, no extension.
