@@ -47,7 +47,7 @@ Preface:
 
 A legacy Kiosk and intends to be a coin operated Text-to-Image Arcade setup using Stable Diffusion Automatic1111 API (on localhost, without internet nor mouse).
 
-Users put in 0.25 cents and get 3 credits.  Each image generated costs 2 credits, and to vote on any one generated image to be in the top voted on list by votes is 1 credit.  Appropriately the font and generating image sound is Transformers(R).  Idle it makes more casino type of sounds periodically, and there is a coin drop 
+Users put in 0.25 cents and get 3 credits.  Each image generated costs 2 credits, and to vote on any one generated image to be in the top voted on list by votes is 1 credit.  Appropriately the font and generating image sound is Transformers(R).  Idle it makes more casino type of sounds periodically, and there is a coin drop sound.
 
 First, you will need to get [Automatic1111](https://github.com/AUTOMATIC1111/stable-diffusion-webui) setup.  You might want to just start with this article however:  [How to Run Stable Diffusion Locally With a GUI on Windows](https://www.howtogeek.com/832491/how-to-run-stable-diffusion-locally-with-a-gui-on-windows/#how-to-install-stable-diffusion-with-a-gui) as it can be very difficult depending on your system setup.  There are links below for a very similar system to the one I wrote the arcade on.  After you have Automatic1111 able to load and generate a image from text without errors, I recommend also including the following Automatic1111 extensions (and only these extensions): [stable-diffusion-webui-auto-tls-https](https://github.com/papuSpartan/stable-diffusion-webui-auto-tls-https.git) and [stable-diffusion-webui-nsfw-censor](https://github.com/AUTOMATIC1111/stable-diffusion-webui-nsfw-censor.git)
 
@@ -55,10 +55,8 @@ The application is written in Visual Basic 6, Visual C++ 6 and Python 3.10.6 req
 
 IF YOU INTEND TO TRY TO RUN THIS PROGRAM, PLEASE READ THE COMPILE CONDITIONS COMMENTS IN THE SOURCE CODE CAREFULLY AS IT IS POSSIBLE TO LOCK YOURSELF OUT OF THE SYSTEM LEAST THE POWER BUTTON AVAILABLE FOR RECOVERY TO BE USED.
 
-The application runs as a Windows Shell with all restrictions necessary to be a public Kiosk with a keyboard.  In a full production environment (inside a coin operated arcade box housing) auto logon to a password-less administrator account is the only thing that does not setup with the code
-and would be required to boot it straight into the shell.  Just ask CoPilot "What are the registry entries used to auto login to a password-less account on Windows 11?" coPilot basically wrote most the Visual Basic 6 registry module and the Txt2Img2Txt.py Python.
+The application runs as a Windows Shell with all restrictions necessary to be a public Kiosk housed inside a coin operated arcade box with just a keyboard for the user input. I made an [Amazon.com Automatic1111 Arcade Hardware List](https://www.amazon.com/hz/wishlist/ls/3R5Y55014VKWR?ref_=wl_share) list of product that I anticipate I would be buying for the full build.
 
-A list of products for a keyboarded kiosk: [Amazon.com Automatic1111 Arcade Hardware List](https://www.amazon.com/hz/wishlist/ls/3R5Y55014VKWR?ref_=wl_share)
 
 The flow of the screens:
 
@@ -95,22 +93,20 @@ Single Image View Screen >------> Election Gallery Vote/Views >-----> -alt-key->
         credit in the game, the screens do not auto switch unless it's done generating.
         While credits remain, all screens are available via navigation of the keyboard.
         There is two modes of election periods, one is no term, and votes are based on
-        all time accumulating, but they reset if the machine goes to term elections and
+        all time accumulating, but they taper if the machine goes to term elections and
         the term amount is set in the code via constants documented, the auto switching
         is based on usage that can also be set with the term threshold, for instance if
         the usage is lesser then more, the no term will be enabled, when many uses occur
-        for high traffic arcades, the term stays defined by days passing, resetting votes.
-        Note, a resource file exists mapped out in directories so you can delete mine for
-        your own conscious and build it yourself, a plus is it consists of custom sound FX.
+        for high traffic arcades, the term stays defined by days passing, for new elect.
+        Note, a resource file exists mapped out in directories with some binary files to
+        make it a bit easier in starting it up, and it also consists of custom sound FX.
 
 ####################################################################################################
 ####################################################################################################
 ####################################################################################################
 ```
 
-Step by step for preparing a Dell XPS with Windows 11 (in
-
-example) to run this legacy Kiosk Template application.
+Step by step for preparing a Dell XPS with Windows 11 (in example) to run this legacy Kiosk Template application.
 
 1. Crate the Kiosk admin digital card. Using a digital card or flash drive, (which ever the system interface accepts),
 
