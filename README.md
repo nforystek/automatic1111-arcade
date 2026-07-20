@@ -154,7 +154,7 @@ Step by step for preparing a Dell XPS with Windows 11 (in example) to run this l
 
     Administrators: Allow: Full Control, Modify, Read & execute, Read, Write
 
-    Local account: Allow: Read & execute & Read
+    Users: Allow: Read & execute & Read
 
   To add a user after you click the "Edit" button click the "Add..." button then click the "Advanced..." button
 
