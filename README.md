@@ -4,7 +4,7 @@
 <table>
 
 <tr><td colspan=2 align=middle><center>
-<img src="./sd-arcade.png" alt="Stable Diffusion Automatic1111 Arcade (digital mock)" width="200"/>
+<img src="./mockup-arcade.png" alt="Stable Diffusion Automatic1111 Arcade (digital mock)" width="200"/>
 </center>
 </td></tr>
 
